@@ -3,6 +3,9 @@ import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 
+//import rutas
+import authRoutes from "./routes/auth.routes";
+
 //initial setup
 const app = express();
 require("dotenv").config();
@@ -16,9 +19,12 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(express.json());
 
-
 //Rutas
+app.get("/", (req, res) => {
+  res.json({
+    message: "Proyecto Analisis 2",
+  });
+});
+app.use("/api/auth", authRoutes);
 
-
-
-export default app
+export default app;
