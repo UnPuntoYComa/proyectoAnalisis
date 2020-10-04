@@ -6,6 +6,16 @@ import bodyParser from "body-parser";
 //import rutas
 import authRoutes from "./routes/auth.routes";
 
+//BD
+import {initial} from './libs/initialSetup'
+const db = require("./database");
+db.sequelize.sync({force: true}).then(() => { //sync({force: true})
+  console.log('Drop and Resync Db');
+  initial();
+});
+
+
+
 //initial setup
 const app = express();
 require("dotenv").config();
