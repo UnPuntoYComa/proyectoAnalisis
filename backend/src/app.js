@@ -7,14 +7,12 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.routes";
 
 //BD
-import {initial} from './libs/initialSetup'
+//import {initial} from './libs/initialSetup'
 const db = require("./database");
-db.sequelize.sync({force: true}).then(() => { //sync({force: true})
-  console.log('Drop and Resync Db');
-  initial();
+db.sequelize.sync().then(() => { //sync({force: true}) para eliminar la tabla y syncronizar de nuevo
+  console.log('Sync Db');
+  //initial(); //crea los usuarios iniciales
 });
-
-
 
 //initial setup
 const app = express();

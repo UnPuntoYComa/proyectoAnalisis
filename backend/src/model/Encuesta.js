@@ -1,12 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
-  const Encuesta = sequelize.define("Encuesta", {
+  const Encuesta = sequelize.define("encuesta", {
     name: {
       type: Sequelize.STRING,
-    },
-    id_encuesta: {
-      type: Sequelize.INTEGER,
-      primaryKey: true
     },
   });
   return Encuesta;
 };
+

@@ -19,8 +19,16 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("./model/User")(sequelize, Sequelize);
-db.encuesta = require("./model/Encuesta")(sequelize, Sequelize);
+//Crear tablas si no existen
+//db.user = require("./model/User")(sequelize, Sequelize);
+//db.encuesta = require("./model/Encuesta")(sequelize, Sequelize);
+
+//relaciones
+// db.user.hasMany(db.encuesta, {as: "encuesta"})
+// db.encuesta.belongsTo(db.user,{
+//   foreignKey: "user_id",
+//   as: "user"
+// })
 
 
 module.exports = db;
