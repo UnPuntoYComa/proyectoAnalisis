@@ -5,13 +5,17 @@ import bodyParser from "body-parser";
 
 //import rutas
 import authRoutes from "./routes/auth.routes";
-
+import usuario from "./routes/usuario";
+import encuesta from "./routes/encuesta";
+import pregunta from "./routes/pregunta";
 //BD
 //import {initial} from './libs/initialSetup'
 const db = require("./database");
 db.sequelize.sync().then(() => { //sync({force: true}) para eliminar la tabla y syncronizar de nuevo
   console.log('Sync Db');
   //initial(); //crea los usuarios iniciales
+},(error)=> {
+  console.log(error);
 });
 
 //initial setup
@@ -34,5 +38,8 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/api/auth", authRoutes);
+app.use('/api/usuario',usuario);
+app.use('/api/encuesta',encuesta);
+app.use('/api/pregunta',pregunta);
 
 export default app;
