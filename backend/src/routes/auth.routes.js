@@ -1,13 +1,10 @@
 import { Router } from "express";
-import { verifySignup } from "../middlewares";
+import { checkDuplicateEmail } from "../middlewares/verifySignup";
 import * as authController from "../controllers/auth.controller";
 
 const router = Router();
-const verify = [
-  verifySignup.checkDuplicatedUsernameOrEmail
-];
 
-router.post("/signup", verify, authController.signup);
+router.post("/signup",checkDuplicateEmail, authController.signup);
 router.post("/signin", authController.signin);
 
 export default router;
