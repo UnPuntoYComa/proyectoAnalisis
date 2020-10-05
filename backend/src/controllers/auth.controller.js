@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-const db = require("../database");
-const config = require("../config");
+import config from "../config";
+import db from '../database'
+
 //registro de usuarios
 export const signup = async (req, res) => {
   try {
