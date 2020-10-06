@@ -1,0 +1,89 @@
+.title{
+  font-size: 28px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+.title-md{
+  font-size: 20px;
+  text-align: center;
+}
+.icon-item{
+  margin-right: 8px;
+}
+.list-horizontal{
+  padding: 0;
+  margin: 0 0 10px;
+  list-style: none;
+}
+.list-horizontal li{
+  display: inline-block;
+  font-size: 30px;
+  color: #333;
+  vertical-align: middle;
+}
+.list-horizontal li a{
+  color: inherit;
+  display: block;
+  padding: 5px;
+}
+.list-horizontal.right{
+  text-align: right;
+}
+.output{
+  padding: 5px 10px;
+  color: #333;
+  text-transform: uppercase;
+  border: 1px solid #ccc;
+  margin: 5px 0 10px;
+  background-color: #eee;
+  font-size: 16px;
+}
+.label-simple{
+  font-size: 16px;
+  color: #222;
+  font-weight: bold;
+}
+.menu a{
+  color: #333;
+}
+.body-content{
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+.form-group .inline-control{
+  display: inline-block;
+  width: auto;
+}
+.legend-simple{
+  font-size: 14px;
+}
+.control-label.left{
+  text-align: left;
+}
+.radio.nopadd-top{
+  padding-top: 0;
+}
+.text-footer{
+  font-size: 13px;
+  margin: 20px 0 10px;
+}
+.icon-action{
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+.icon-action:hover{
+  color: #111;
+}
+.icon-action:active{
+  color: #222;
+}
+.icon-notify{
+  font-size: 20px;
+  vertical-align: middle;
+}
+.margins{
+  margin: 20px 0 10px;
+}

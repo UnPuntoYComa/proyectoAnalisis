@@ -1,1 +1,347 @@
-prueba
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Crear Encuesta</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+  <div class="header">
+    <div class="row">
+      <div class="col-sm-3">
+        <h3 class="label-simple">Bienvenido</h3>
+        <div class="output">
+          Bertolotti Zuñiga, Carmen
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="list-horizontal right">
+              <li><a href="#">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+        <h2 class="title">
+          Sistema de Encuestas de Docente
+        </h2>
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="list-horizontal right">
+              <li>
+                <button type="button" class="btn btn-default">
+                  <span class="icon-notify">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                  </span>
+                  <span class="badge">7</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <nav class="menu">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-home" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Inicio</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Formulario</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Encuestas</a></li>
+          <li class="list-group-item">
+             <span class="icon-item">
+               <i class="fa fa-suitcase" aria-hidden="true"></i>
+             </span>
+            <a href="#">
+              Docente</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-list" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Consultas</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-file" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Reportes</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Usuarios</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Ayuda</a></li>
+          <li class="list-group-item">
+            <span class="icon-item">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </span>
+            <a href="#">
+              Salir</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="body-content">
+            <h2 class="title-md">Crear Encuesta</h2>
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="list-horizontal right"></ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <fieldset>
+                      <legend class="legend-simple">Nueva Encuesta</legend>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nombre de la Encuesta">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#menu1">En blanco</a></li>
+                          </ul>
+                          <div class="tab-content">
+                            <div id="menu1" class="tab-pane fade in active">
+                              <div class="margins">
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th>Nro</th>
+                                          <th>Pregunta</th>
+                                          <th>Tipo de Pregunta</th>
+                                          <th>Acciones</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>1</td>
+                                          <td>El docente asiste con puntualidad en su horario de clases.</td>
+                                          <td>CERRADA</td>
+                                          <td>
+                                            <a href="#" class="icon-action"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a href="#" class="icon-action"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>2</td>
+                                          <td>La presentación personal del docente es adecuada.</td>
+                                          <td>CERRADA</td>
+                                          <td>
+                                            <a href="#" class="icon-action"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a href="#" class="icon-action"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>2</td>
+                                          <td>¿En que podria mejorar el docente del curso?</td>
+                                          <td>ABIERTA</td>
+                                          <td>
+                                            <a href="#" class="icon-action"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a href="#" class="icon-action"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <button type="button" class="btn btn-default"
+                                  data-toggle="modal" data-target="#modal-add-question">Agregar Pregunta</button>
+                                  <!-- Modal 'Agregar Pregunta' -->
+                                  <div class="modal fade" id="modal-add-question" role="dialog">
+                                    <div class="modal-dialog">
+                                      <!-- Modal content-->
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Agregar Pregunta</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="row">
+                                            <div class="col-sm-12">
+                                              <div class="form-group">
+                                                <label for="nueva-pregunta">Nueva Pregunta</label>
+                                                <textarea class="form-control" rows="5" id="nueva-pregunta" placeholder="Escribe una pregunta"></textarea>
+                                              </div>
+                                              <div class="form-group">
+                                                <label class="radio-inline"><input type="radio" name="optradio">Abierta</label>
+                                                <label class="radio-inline"><input type="radio" name="optradio">Cerrada</label>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Agregar</button>
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                  <!-- End Modal -->
+                                  <button type="button" class="btn btn-default" 
+                                  data-toggle="modal" data-target="#modal-choose-questions-from-model">Elegir de Modelo Existente</button>
+                                  <!-- Modal 'Elegir de Modelo Existente' -->
+                                  <div class="modal fade" id="modal-choose-questions-from-model" role="dialog">
+                                    <div class="modal-dialog">
+                                      <!-- Modal content-->
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Elegir Modelo</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="row">
+                                            <div class="col-sm-12">
+                                              <div class="form-group">
+                                                <label for="nueva-pregunta">Elegir Modelo</label>
+                                                <select name="modelo" id="" class="form-control">
+                                                  <option value="">----- Elije una Encuesta -----</option>
+                                                  <option value="1">Encuesta 1</option>
+                                                  <option value="1">Encuesta 2</option>
+                                                  <option value="1">Encuesta 3</option>
+                                                  <option value="1">Encuesta 4</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-sm-12">
+                                              <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                    <th></th>
+                                                    <th>Nro</th>
+                                                    <th>Pregunta</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>
+                                                      <input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>1</td>
+                                                    <td>El docente asiste con puntualidad en su horario de clases.</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>
+                                                      <input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>2</td>
+                                                    <td>La presentación personal del docente es adecuada.</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>
+                                                      <input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>Se comunica con claridad y mantiene u tono e intensidad de voz adecuados.</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>
+                                                      <input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>4</td>
+                                                    <td>Atiende con voluntad y responde con amabilidad las preguntas de los alumnos.</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>
+                                                      <input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>5</td>
+                                                    <td>Plantea claramente los objetivos del curso asi como su importancia.</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>
+                                                      <input type="checkbox" class="checkbox">
+                                                    </td>
+                                                    <td>6</td>
+                                                    <td>Resalta la importancia de la práctica de valores y de la ética.</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Seleccionar</button>
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                  <!-- End Modal -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <div class="margins text-center">
+                      <button type="button" class="btn btn-default btn-">REGISTRAR ENCUESTA</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="col-sm-8 col-sm-offset-4">
+      <p class="text-footer">
+        COPYRIGHT ©2017 ÁREA DE FÁBRICA DE SOFTWARE - FIA-USMP. TODOS LOS DERECHOS RESERVADOS
+      </p>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://use.fontawesome.com/a570390ba4.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+</body>
+</html>
