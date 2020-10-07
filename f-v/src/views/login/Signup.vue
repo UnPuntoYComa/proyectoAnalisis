@@ -37,7 +37,7 @@
                           prepend-icon="mdi-at"
                           type="text"
                           validate-on-blur
-                          v-model="register.email"
+                          v-model="register.correo"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -46,7 +46,7 @@
                         <v-text-field
                           class="mx-4"
                           prepend-icon="mdi-lock"
-                          v-model="register.password"
+                          v-model="register.contraseña"
                           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                           :type="show ? 'text' : 'password'"
                           :rules="[rulesPass.required]"
@@ -93,7 +93,7 @@
                           prepend-icon="mdi-form-textbox"
                           type="text"
                           validate-on-blur
-                          v-model="register.firstname"
+                          v-model="register.nombre"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -149,10 +149,10 @@ export default {
   data() {
     return {
       register: {
-        email: "",
-        password: "",
+        correo: "",
+        contraseña: "",
+        nombre: "",
         firstname: "",
-        lastname: "",
       },
 
       e1: 1,

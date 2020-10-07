@@ -30,6 +30,11 @@ const routes = [
     name: 'CrearEncuestas',
     component: () => import(/* webpackChunkName: "proyecto" */ '../views/CrearEncuesta')
   },
+  {
+    path: '/estadisticas',
+    name: 'Estadisticas',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Estadisticas.vue')
+  },
 
 
 ]

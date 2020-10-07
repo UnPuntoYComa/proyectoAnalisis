@@ -21,11 +21,11 @@
                 type="text"
                 validate-on-blur
                 class="mx-4"
-                v-model="user.email"
+                v-model="user.correo"
               ></v-text-field>
               <v-text-field
                 prepend-icon="mdi-lock"
-                v-model="user.password"
+                v-model="user.contraseña"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show ? 'text' : 'password'"
                 :rules="[rulesPass.required]"
@@ -57,8 +57,8 @@ export default {
   data() {
     return {
       user: {
-        email: "",
-        password: "",
+        correo: "",
+        contraseña: "",
       },
       show: false,
       rulesPass: {
@@ -72,6 +72,7 @@ export default {
       try {
         let response = await this.$http.post("/api/auth/signin", this.user);
         let token = response.data.token;
+        console.log(token);
         if (token) {
           localStorage.setItem("jwt", token);
           this.$router.push("/crear-encuesta");
