@@ -1,5 +1,7 @@
 <template>
-  <h1>estadisticas</h1>
+<v-container>
+  <h1>home</h1>
+</v-container>
 </template>
 
 <script>
