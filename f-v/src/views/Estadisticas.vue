@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <h1>home</h1>
+  <h2 class="text-center text-h2">home</h2>
 </v-container>
 </template>
 

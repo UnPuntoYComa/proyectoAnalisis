@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <h2>crear encuestas</h2>
+      <h2  class="text-center text-h2">crear encuestas</h2>
   </v-container>
 </template>
 
