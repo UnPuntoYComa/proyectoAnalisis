@@ -5,7 +5,7 @@
         <v-card class="elevation-12" height="100%">
           <v-form @submit.prevent="loginUser">
             <v-img
-              src="https://lh3.googleusercontent.com/proxy/jLapqInhsLWXJqMLyhvT7t50iFdrixDzPGppDNTQTzrs0pYaHEosz-wPtKHmrLUohGJQHlfSU4Yv9fU0IDFldZ4JaRK5UHyn1uj8X5i-u0xY6bzASLUpPSvoJdLvrvVtNxdT7A"
+              src="https://citrusbug.com/storage/uploads/technology/Vue.jpg"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               aspect-ratio="1.9"

@@ -10,6 +10,8 @@
 <script>
 import Header from "./components/layout/Header";
 import VueJwtDecode from "vue-jwt-decode";
+import { mapState, mapMutations } from "vuex";
+
 export default {
   components: {
     Header,
@@ -21,10 +23,16 @@ export default {
   },
   methods: {
     getUserDetails() {
-      let token = localStorage.getItem("jwt");
-      let decoded = VueJwtDecode.decode(token);
-      this.user = decoded;
-
+      try {
+        let token = localStorage.getItem("jwt");
+        let decoded = VueJwtDecode.decode(token);
+        this.user = decoded;
+        if (this.user) {
+          this.$store.commit("login");
+        }
+      } catch (error) {
+        console.log("no te has loggeado");
+      }
     },
   },
   created() {
