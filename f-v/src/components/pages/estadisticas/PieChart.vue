@@ -10,21 +10,42 @@ export default {
         {
           label: "Total A",
           data: [94, 75, 71, 49, 28],
-          backgroundColor: ["Red", "Blue", "Yellow", "Green", "Purple"],
+          backgroundColor: [
+            "#FF1744",
+            "#304FFE",
+            "#FFEE58",
+            "#00E676",
+            "#8E24AA",
+          ],
         },
         {
           label: "Total B",
-          backgroundColor: ["Red", "Blue", "Yellow", "Green", "Purple"],
+          backgroundColor: [
+            "#FF1744",
+            "#304FFE",
+            "#FFEE58",
+            "#00E676",
+            "#8E24AA",
+          ],
           data: [34, 36, 34, 31, 22],
         },
         {
           label: "Total C",
-          backgroundColor: ["Red", "Blue", "Yellow", "Green", "Purple"],
-          data: [34, 36, 34, 31,12],
+          backgroundColor: [
+            "#FF1744",
+            "#304FFE",
+            "#FFEE58",
+            "#00E676",
+            "#8E24AA",
+          ],
+          data: [34, 36, 34, 31, 12],
         },
       ],
     },
     options: {
+      animation: {
+        animateScale: true,
+      },
       responsive: true,
       maintainAspectRatio: false,
       title: {
