@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import TestSurveyBuilder from '../components/pages/survey-builder/TestSurveyBuilder.vue';
+
 
 Vue.use(VueRouter)
 
@@ -28,7 +30,14 @@ const routes = [
   {
     path: '/crear-encuesta',
     name: 'CrearEncuestas',
-    component: () => import(/* webpackChunkName: "proyecto" */ '../views/CrearEncuesta')
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/CrearEncuesta'),
+    children: [
+      {
+        path: "/",
+        name: "Create",
+        component: TestSurveyBuilder,
+      },
+    ]
   },
   {
     path: '/estadisticas',
