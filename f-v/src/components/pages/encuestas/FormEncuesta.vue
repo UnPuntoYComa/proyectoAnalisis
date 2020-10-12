@@ -28,13 +28,13 @@
         ></v-text-field
       ></v-row>
     </v-card-text>
-
     <v-card-actions>
       <v-btn color="orange" text> Guardar </v-btn>
       <v-btn color="indigo accent-3" text> limpiar </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
 export default {
   data() {

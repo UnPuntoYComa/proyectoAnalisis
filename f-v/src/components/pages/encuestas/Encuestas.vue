@@ -6,22 +6,14 @@
           height="200px"
           src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
         >
-          <v-app-bar
-            flat
-            color="rgba(0, 0, 0, 0)"
-          >
-
+          <v-app-bar flat color="rgba(0, 0, 0, 0)">
             <v-toolbar-title class="title white--text pl-0">
               Titulo encuesta
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
 
-            <v-btn
-              color="white"
-              icon
-            >
-            </v-btn>
+            <v-btn color="white" icon> </v-btn>
           </v-app-bar>
 
           <v-card-title class="white--text mt-8">
@@ -29,23 +21,16 @@
               <img
                 alt="user"
                 src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-              >
+              />
             </v-avatar>
-            <p class="ml-3">
-              Creador encuesta
-            </p>
+            <p class="ml-3">Creador encuesta</p>
           </v-card-title>
         </v-img>
 
         <v-card-text>
-          <div class="font-weight-bold ml-8 mb-2">
-            Today
-          </div>
+          <div class="font-weight-bold ml-8 mb-2">Today</div>
 
-          <v-timeline
-            align-top
-            dense
-          >
+          <v-timeline align-top dense>
             <v-timeline-item
               v-for="message in messages"
               :key="message.time"
@@ -66,28 +51,43 @@
   </v-container>
 </template>
 <script>
-  export default {
-    data: () => ({
-      messages: [
+export default {
+  data: () => ({
+    messages: [
+      {
+        from: "You",
+        message: "Sure, I'll see you later.",
+        time: "10:42am",
+        color: "deep-purple lighten-1",
+      },
+      {
+        from: "John Doe",
+        message: "Yeah, sure. Does 1:00pm work?",
+        time: "10:37am",
+        color: "green",
+      },
+      {
+        from: "You",
+        message: "Did you still want to grab lunch today?",
+        time: "9:47am",
+        color: "deep-purple lighten-1",
+      },
+    ],
+
+    encuesta: {
+      title: "titulo",
+      preguntas: [
         {
-          from: 'You',
-          message: 'Sure, I\'ll see you later.',
-          time: '10:42am',
-          color: 'deep-purple lighten-1',
+          pregunta: "klsahdf",
+          type: "multiple",
+          opciones: ["opcion1", "opcion2"],
         },
         {
-          from: 'John Doe',
-          message: 'Yeah, sure. Does 1:00pm work?',
-          time: '10:37am',
-          color: 'green',
-        },
-        {
-          from: 'You',
-          message: 'Did you still want to grab lunch today?',
-          time: '9:47am',
-          color: 'deep-purple lighten-1',
+          pregunta: "pregunta2",
+          type: "texto",
         },
       ],
-    }),
-  }
+    },
+  }),
+};
 </script>
