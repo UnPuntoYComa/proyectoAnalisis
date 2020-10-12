@@ -1,154 +1,177 @@
 <template>
-  <div class="vue-survey-builder-content vsb-content">
-    <select class="vsb-select" v-model="selectedType" v-on:change="questionTypeChanged(selectedType)">
-      <option v-for="(questionType, index) in questionTypes" :value="questionType.value" :key="index" :disabled="questionType.value === 'DEFAULT'" :selected="questionType.value === 'DEFAULT'">{{questionType.label}}</option>
-    </select>
-    <div class="question-section" v-if="selectedType !== 'DEFAULT'">
-      <div class="pb-10">
-        <div class="vsb-choices-text">Question</div>
-        <input type="text" class="" placeholder="Enter question text" v-model="question.body">
-      </div>
-      <div class="" v-if="selectedType === 'BOOLEAN'">
-        <div class="vsb-choices-text">Answer Choices</div>
-        <div class="" v-for="(option, index) in question.options" :key="index">
-          <div class="clear-both">
-            <input type="text" class="width-100 float-left" placeholder="Enter an answer choice" v-model="option.body">
-            <button class="vsb-btn-link color-red width-10 mt-10" v-on:click="deleteQuestionOptionItem(question.options, index)" v-if="index > 1">Remove</button>
-          </div>
-        </div>
-      </div>
-      <div class="" v-if="selectedType === 'DATE'">
-        <div class="">
-          <label class="vsb-block"><input type="radio" v-model="question.dateFormat" value="MM/DD/YY"> MM/DD/YY</label>
-          <label class="vsb-block"><input type="radio" v-model="question.dateFormat" value="DD/MM/YY"> DD/MM/YY</label>
-          <label class="vsb-block"><input type="radio" v-model="question.dateFormat" value="MM/DD/YYYY"> MM/DD/YYYY</label>
-          <label class="vsb-block"><input type="radio" v-model="question.dateFormat" value="DD/MM/YYYY"> DD/MM/YYYY</label>
-        </div>
-      </div>
-      <div class="" v-if="selectedType === 'MULTI_CHOICE'">
-        <div class="vsb-choices-text">Answer Choices</div>
-        <div class="" v-for="(option, index) in question.options" :key="index">
-          <div class="clear-both">
-            <input type="text" class="width-90 float-left" placeholder="Enter an answer choice" v-model="option.body">
-            <button class="vsb-btn-link color-red width-10 mt-10" v-on:click="deleteQuestionOptionItem(question.options, index)" v-if="index > 1">Remove</button>
-          </div>
-        </div>
-        <div class="display-block">
-          <button class="vsb-btn-link color-blue" v-on:click="addAnotherAnswer()">Add another answer</button>
-        </div>
-      </div>
+  <v-container>
+    <v-row justify="center">
+      <v-col md="6">
+        <v-card>
+          <v-card-title
+            ><v-select
+            outlined
+            color="indigo accent-3"
+              v-model="selectedType"
+              v-on:change="questionTypeChanged(selectedType)"
+              :items="questionTypes"
+            >
+            </v-select>
+          </v-card-title>
+          <v-card-text>
+            <div class="question-section" v-if="selectedType !== 'DEFAULT'">
+              <div class="pb-10">
+                <v-text-field
+                  label="Pregunta"
+                  outlined
+                  v-model="question.body"
+                />
+              </div>
+              <v-container v-if="selectedType === 'BOOLEAN'">
+                <div class="vsb-choices-text">Answer Choices</div>
+                <div
+                  class=""
+                  v-for="(option, index) in question.options"
+                  :key="index"
+                >
+                  <div class="clear-both">
+                    <v-text-field outlined v-model="option.body" />
+                    <button
+                      class="vsb-btn-link color-red width-10 mt-10"
+                      v-on:click="
+                        deleteQuestionOptionItem(question.options, index)
+                      "
+                      v-if="index > 1"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </v-container>
+              <v-container v-if="selectedType === 'MULTI_CHOICE'">
+                <div class="vsb-choices-text">Answer Choices</div>
+                <div
+                  class=""
+                  v-for="(option, index) in question.options"
+                  :key="index"
+                >
+                  <div class="clear-both">
+                    <v-row justify="center">
+                      <v-col md="8">
+                        <v-text-field
+                          label="Ingresa tu opcion"
+                          outlined
+                          v-model="option.body"
+                        />
+                      </v-col>
+                      <v-col md="4"
+                        ><v-btn
+                          color="error"
+                          text
+                          v-on:click="
+                            deleteQuestionOptionItem(question.options, index)
+                          "
+                          v-if="index > 1"
+                        >
+                          remover
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </div>
+                <v-row>
+                  <v-btn color="indigo accent-3" text v-on:click="addAnotherAnswer()">
+                    agrega otra opcion
+                  </v-btn>
+                </v-row>
+              </v-container>
+              <v-container v-if="selectedType === 'SINGLE_CHOICE'">
+                <div class="vsb-choices-text">Answer Choices</div>
+                <div
+                  class=""
+                  v-for="(option, index) in question.options"
+                  :key="index"
+                >
+                  <v-row>
+                    <v-col cols="12" md="8">
+                      <v-text-field
+                        outlined
+                        label="Ingresa tu opcion"
+                        v-model="option.body"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-btn
+                        text
+                        color="error"
+                        v-on:click="
+                          deleteQuestionOptionItem(question.options, index)
+                        "
+                        v-if="index > 1"
+                        >remover</v-btn
+                      >
+                    </v-col>
+                  </v-row>
+                </div>
+                <v-row>
+                  <v-btn
+                    text
+                    color="indigo accent-3"
+                    v-on:click="addAnotherAnswer()"
+                  >
+                    agrega otra opcion
+                  </v-btn>
+                </v-row>
+              </v-container>
+              <v-container v-if="selectedType === 'TEXT'">
+                <v-checkbox
+                  label="limite de caracteres"
+                  v-model="question.characterLimited"
+                />
 
-      <div class="" v-if="selectedType === 'NUMBER'">
-        <label class="display-block">
-          <input type="checkbox" class="" v-model="question.hasUnits" name="hasUnits" />
-          <span class="">Answer label <input type="text" class="width-10" placeholder="ex. mins, lbs, days" v-model="question.units" :disabled="!question.hasUnits"></span>
-        </label>
-        <label class="display-block">
-          <input type="checkbox" v-model="question.hasMinMax" name="subType" />
-          <span class="">Min/max value
-            <input type="number" class="width-10" v-model="question.minValue" placeholder="min" min="1" max="2048" :disabled="!question.hasMinMax">
-            <span class="width-10">to</span>
-            <input type="number" class="width-10" v-model="question.maxValue" placeholder="max" min="1" max="2048" :disabled="!question.hasMinMax">
-          </span>
-        </label>
-        <label class="display-block">
-          <input type="checkbox" v-model="question.allowDecimals" value="Single" name="subType" />
-          <span class="">Allow decimals</span>
-        </label>
-      </div>
-      <div class="scale-type" v-if="selectedType === 'SCALE'">
-        <div>Scale labels</div>
-        <div class="">
-          <div class="display-inline-block">Intervals</div>
-          <div class="intervals display-inline-block">
-            <input type="number" min="2" max="100" v-model="question.intervals" v-on:change="changeLabelsLength(question.intervals)">
-          </div>
-          <span class="" v-if="question.reportable">Max of 100 intervals can be entered.</span>
-        </div>
-        <div v-if="question.intervals > 0">
-          <div class="" v-for="(value, index) in question.labels" :key="index">
-            <div v-if="index === 0">
-              <div class="width-10 float-left pt-10">Top</div>
-              <div class="width-90">
-                <input type="text" class="" placeholder="Enter value" v-model="question.labels[question.labels.length - index - 1]">
-              </div>
+                <v-text-field
+                  v-model="question.textLimit"
+                  label="Limite"
+                  outlined
+                />
+              </v-container>
             </div>
-            <div v-else-if="question.labels && (index === question.labels.length - 1)">
-              <div class="width-10 float-left pt-10">Bottom</div>
-              <div class="width-90">
-                <input type="text" name="vertical-labels" class="" placeholder="Enter value" v-model="question.labels[question.labels.length - index - 1]">
-              </div>
-            </div>
-            <div class="text-right" v-if="question.labels && index !== 0 && (index !== question.labels.length - 1)">
-              <div class="width-90">
-                <input type="text" class="" placeholder="Enter value" v-model="question.labels[question.labels.length - index - 1]">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="" v-if="selectedType === 'SINGLE_CHOICE'">
-        <div class="vsb-choices-text">Answer Choices</div>
-        <div class="" v-for="(option, index) in question.options" :key="index">
-          <div class="clear-both">
-            <input type="text" class="width-90 float-left" placeholder="Enter an answer choice" v-model="option.body">
-            <button class="vsb-btn-link color-red width-10 mt-10" v-on:click="deleteQuestionOptionItem(question.options, index)" v-if="index > 1">Remove</button>
-          </div>
-        </div>
-        <div class="vsb-add-answer-btn vsb-btn-link color-blue">
-          <a v-on:click="addAnotherAnswer()">Add another answer</a>
-        </div>
-      </div>
-      <div class="" v-if="selectedType === 'TEXT'">
-        <label class="">
-          <input type="checkbox" v-model="question.characterLimited" name="characterLimited" />
-          <span class="">Character limit <input type="number" class="char-limit-input" v-model="question.textLimit" placeholder="" min="1" max="2048" :disabled="!question.characterLimited"></span>
-        </label>
-      </div>
-      <div class="" v-if="selectedType === 'TIME'">
-        <div class="">
-          <label class=""><input type="radio" v-model="question.timeFormat" value="12" v-on:click="timeFormatModified(question.timeFormat)"> 12 hrs</label>
-          <label class=""><input type="radio" v-model="question.timeFormat" value="24" v-on:click="timeFormatModified(question.timeFormat)"> 24 hrs</label>
-        </div>
-      </div>
-      <div class="buttons-section">
-        <button type="button" class="vsb-btn-link mr-10 color-green" @click="saveQuestion(question)">Save</button>
-        <button type="button" class="vsb-btn-link mr-10 color-blue" @click="cancelQuestion(question)">Cancel</button>
-        <!-- <button type="button" class="vsb-btn-link mr-10 color-red" @click="deleteQuestion(question)">Delete</button> -->
-      </div>
-    </div>
-  </div>
+          </v-card-text>
+          <v-card-action>
+            <v-btn text color="warning" @click="saveQuestion(question)">
+              guardar
+            </v-btn>
+            <v-btn text color="error" @click="cancelQuestion(question)">
+              cancelar</v-btn
+            >
+          </v-card-action>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: 'SurveyBuilder',
+  name: "SurveyBuilder",
   data() {
     return {
       questionTypes: [
-        { value: 'DEFAULT', label: '- Select a question type -' },
-        { value: 'BOOLEAN', label: 'Yes or No' },
-        { value: 'DATE', label: 'Date' },
-        { value: 'MULTI_CHOICE', label: 'Multiple Choice' },
-        { value: 'NUMBER', label: 'Number' },
-        { value: 'SCALE', label: 'Scale' },
-        { value: 'SINGLE_CHOICE', label: 'Single Choice' },
-        { value: 'TEXT', label: 'Text' },
-        { value: 'TIME', label: 'Time' },
+        { value: "DEFAULT", text: "- Select a question type -" },
+        { value: "BOOLEAN", text: "Yes or No" },
+        { value: "MULTI_CHOICE", text: "Multiple Choice" },
+        { value: "SINGLE_CHOICE", text: "Single Choice" },
+        { value: "TEXT", text: "Text" },
       ],
       question: this.options,
       selectedType: null,
     };
   },
-  props: ['options'],
+  props: ["options"],
   computed: {},
   watch: {},
   beforeCreate() {},
   created() {},
   beforeMount() {},
   mounted() {
-    this.question.type = this.question.type ? this.question.type : 'DEFAULT';
+    this.question.type = this.question.type ? this.question.type : "DEFAULT";
     this.selectedType = this.question.type;
+
     window.console.log(this.question, this.selectedType);
   },
   beforeUpdate() {},
@@ -164,16 +187,20 @@ export default {
     questionTypeChanged(type) {
       this.question.type = this.selectedType;
       switch (type) {
-        case 'BOOLEAN':
-          this.question.options = [{ body: 'Yes', sequence: 1 }, { body: 'No', sequence: 2 }];
+        case "BOOLEAN":
+          this.question.options = [
+            { body: "Yes", sequence: 1 },
+            { body: "No", sequence: 2 },
+          ];
           break;
-        case 'SCALE':
+        case "SCALE":
           this.question.labels.length = 2;
           break;
         default:
-          window.console.log('Question type not matched');
+          window.console.log("Question type not matched");
       }
     },
+
     /**
      * @param {String} format
      * @return {null}
@@ -181,6 +208,7 @@ export default {
     timeFormatModified(format) {
       window.console.log(format);
     },
+
     /**
      * @param {null}
      * @return {null}
@@ -189,13 +217,21 @@ export default {
       if (!this.question.options) {
         this.question.options = [];
       }
-      let maxSequence = Number(Math.max(...this.question.options.map(x => x.sequence)));
+      let maxSequence = Number(
+        Math.max(...this.question.options.map((x) => x.sequence))
+      );
       if (!maxSequence) {
         maxSequence = this.question.options.length;
       }
-      this.question.options.push({ body: null, sequence: maxSequence + 1, nextQuestion: null, imageUrl: null }); // eslint-disable-line
+      this.question.options.push({
+        body: null,
+        sequence: maxSequence + 1,
+        nextQuestion: null,
+        imageUrl: null,
+      }); // eslint-disable-line
       this.$forceUpdate();
     },
+
     /**
      * @param {Object, Number}  options, index
      * @return {null}
@@ -203,6 +239,7 @@ export default {
     deleteQuestionOptionItem(options, index) {
       this.question.options.splice(index, 1);
     },
+
     /**
      * @param {null}
      * @return {String} guid
@@ -215,23 +252,26 @@ export default {
       }
       return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
     },
+
     /**
      * @param {Object} question
      * @return {null}
      */
     saveQuestion(question) {
       question.id = question.id ? question.id : this.getGUID(); // eslint-disable-line
-      this.$root.$emit('add-update-question', { question, operation: 'save' });
-      this.question = { type: 'DEFAULT' };
+      this.$root.$emit("add-update-question", question);
+      this.question = { type: "DEFAULT" };
     },
+
     /**
      * @param {Object} question
      * @return {null}
      */
     cancelQuestion(question) {
       window.console.log(question);
-      this.question = { type: 'DEFAULT' };
+      this.question = { type: "DEFAULT" };
     },
+
     /**
      * @param {Object} question
      * @return {null}
@@ -239,6 +279,7 @@ export default {
     deleteQuestion(question) {
       window.console.log(question);
     },
+
     /**
      * @param {Number} intervals
      * @return {null}
@@ -257,6 +298,7 @@ $color-blue: #4c8ce4;
 $color-orange: #ff9635;
 $color-red: #f06559;
 $color-green: #48bf7a;
+
 @for $i from 0 through 5 {
   .p-#{$i * 2} {
     padding: #{$i * 2}px !important;
@@ -292,6 +334,7 @@ $color-green: #48bf7a;
     font-size: #{$i * 2}px !important;
   }
 }
+
 .color-blue {
   color: $color-blue;
 }
@@ -304,6 +347,7 @@ $color-green: #48bf7a;
 .color-green {
   color: $color-green;
 }
+
 .vue-survey-builder-content {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -313,8 +357,9 @@ $color-green: #48bf7a;
   background-color: $color-primary;
   border-radius: 2px;
   margin: 12px 0;
-  input[type='text'],
-  input[type='number'],
+
+  input[type="text"],
+  input[type="number"],
   select {
     width: 100%;
     padding: 0 10px;
@@ -334,6 +379,7 @@ $color-green: #48bf7a;
     background-repeat: no-repeat;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
   }
+
   button {
     padding: 10px;
     text-align: center;
@@ -378,18 +424,22 @@ $color-green: #48bf7a;
     background: none;
     padding: 5px;
   }
+
   .question-section {
     border: 1px solid $color-secondary;
     padding: 10px;
     margin: auto;
   }
+
   .vsb-block {
     display: block;
     padding: 5px 0;
   }
+
   .vsb-choices-text {
     font-size: 16px;
   }
+
   .vsb-select {
     max-width: 200px;
   }

@@ -1,46 +1,51 @@
 <template>
-  <div class="test-survey-builder">
-    <h2 class="text-center">Vue Survey Builder Demo</h2>
-    <hr/>
-    <QuestionsView :questions="questionsList" :readOnly="true" />
+  <v-container>
+    <v-btn color="teal accent-3" large text @click="addNewQuestion()">
+      agregar pregunta
+    </v-btn>
+    <v-row justify="center">
+      <QuestionsView :questions="questionsList" :readOnly="false" />
+    </v-row>
     <div v-if="addQuestion">
       <SurveyBuilder :options="sampleQuestion" />
     </div>
-    <div class="pt-10">
-      <button type="button" class="add_another_btn br-25" v-on:click="addNewQuestion()">Add question</button>
-    </div>
-    <h4>  </h4>
-  </div>
+    <v-card-actions v-if="questionsList.length > 0">
+      <v-btn color="orange" text> Guardar </v-btn>
+    </v-card-actions>
+  </v-container>
 </template>
 
 <script>
-import {SurveyBuilder} from 'vue-survey-builder';
-import QuestionsView from './QuestionsView';
-import sampleQuestionObj from './survey-builder.json';
+import SurveyBuilder from "./SurveyBuilder";
+import QuestionsView from "./QuestionsView";
+import sampleQuestionObj from "./survey-builder.json";
 export default {
-  name: 'TestSurveyBuilder',
+  name: "TestSurveyBuilder",
   data() {
     return {
       questionsList: [],
       addQuestion: false,
+      array: [],
     };
   },
   mounted() {
-    this.$root.$on('add-update-question', q => {
+    this.$root.$on("add-update-question", (q) => {
       this.updateQuestionsList(q);
     });
   },
   components: { SurveyBuilder, QuestionsView },
   methods: {
     updateQuestionsList(question) {
-      const questionIndex = this.questionsList.findIndex(x => x.id === question.id);
+      const questionIndex = this.questionsList.findIndex(
+        (x) => x.id === question.id
+      );
       if (questionIndex >= 0) {
         this.questionsList.splice(questionIndex, 1, question);
       } else {
         this.questionsList.push(JSON.parse(JSON.stringify(question)));
       }
       this.addQuestion = false;
-      this.$root.$emit('selected-question', null);
+      this.$root.$emit("selected-question", null);
       window.console.log(question, this.addQuestion, this.questionsList);
     },
     addNewQuestion() {

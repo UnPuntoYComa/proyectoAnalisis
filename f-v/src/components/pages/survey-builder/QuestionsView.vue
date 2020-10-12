@@ -1,93 +1,95 @@
 <template>
-  <div class="row">
-    <div v-for="(question, index) in questions" :key="index">
+  <v-row justify="center">
+    <v-col cols="12" md="4" v-for="(question, index) in questions" :key="index">
       <div v-if="selectedQuestion.id === question.id">
         <SurveyBuilder :options="selectedQuestion"></SurveyBuilder>
       </div>
-      <div class="card read-only-question cursor_grab" v-if="selectedQuestion.id !== question.id">
-        <div class="row">
-          <div class="p-0">
-            <div class="question-section">
-              <p class="question_color">Question
-                <span class="">{{ index + 1 }}:</span>
-              </p>
-              <p class="question_body">{{question.body}}</p>
-            </div>
-            <div class="answer-section">
-              <div class="option-section" v-if="question.type === 'BOOLEAN'">
-                <div class="" v-for='(option, index) in question.options' :key="index">
-                  <p class="radio-option">
-                    <input type="radio" name="boolean_type" :disabled="readOnly">
-                    <label>{{option.body}}</label>
-                  </p>
-                </div>
-              </div>
-              <div class="option-section pad-top20" v-if="question.type === 'SCALE'">
-                <vueSlider ref="slider" :data="question.labels" :value="question.minValue" :piecewise="true" direction="horizontal" class="horizontal-vue-slider" :min="question.minValue" :max="question.maxValue" :piecewiseLabel="true"></vueSlider>
-              </div>
-              <div class="option-section" v-if="question.type === 'TEXT'">
-                <input type="text" class="input-text readonly" placeholder="" :readonly="readOnly" />
-              </div>
-              <div class="option-section" v-if="question.type === 'DATE'">
-                <div class="p-0">
-                  <input type="text" class="input-text readonly" placeholder="" v-model="question.dateFormat" :readonly="readOnly">
-                </div>
-              </div>
-              <div class="option-section" v-if="question.type === 'TIME'">
-                <div class="p-0">
-                  <input type="text" class="input-text readonly" placeholder="" :value="question.timeFormat === '12' ? 'HH:MM AM/PM':'HH:MM'" :readonly="readOnly">
-                </div>
-              </div>
-              <div class="option-section" v-if="question.type === 'NUMBER'">
-                <div class="">
-                  <input type="text" class="input-text readonly width-90" placeholder="" :readonly="readOnly">
-                  <span v-if="question.hasUnits">{{question.units}}</span>
-                </div>
-              </div>
-              <div class="option-section" v-if="question.type === 'SINGLE_CHOICE'">
-                <div v-for='(option, index) in question.options' :key="index">
-                  <label>
-                    <input type="radio" name="single" :disabled="readOnly">&nbsp;{{option.body}}
-                  </label>
-                  <div class="" v-if="option.imageUrl">
-                    <img :src="option.imageUrl" alt="" class="">
-                  </div>
-                </div>
-              </div>
-              <div class="option-section" v-if="question.type === 'MULTI_CHOICE'">
-                <div v-for='(option, index) in question.options' :key="index">
-                  <label>
-                    <input type="checkbox" :disabled="readOnly">&nbsp;{{option.body}}
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-0 text-right">
-            <button type="button" class="sb-btn-link mr-10 color-orange" v-on:click="editQuestion(question, index)">Edit</button>
-            <button type="button" class="sb-btn-link mr-10 color-red" v-on:click="deleteQuestion(question, index)">Delete</button>
-          </div>
+
+      <v-card
+        v-if="selectedQuestion.id !== question.id"
+        width="100%"
+        height="100%"
+        elevation="12"
+      >
+        <div class="question-section">
+          <v-card-title>
+            Pregunta
+            <span class="">{{ index + 1 }}:</span>
+          </v-card-title>
         </div>
-      </div>
-    </div>
-  </div>
+        <v-card-subtitle class="body-1">
+          {{ question.body }}
+        </v-card-subtitle>
+        <v-card-text>
+          <v-container v-if="question.type === 'BOOLEAN'">
+            <v-radio-group v-model="radios" :mandatory="false">
+              <v-radio
+                v-for="(option, index) in question.options"
+                :key="index"
+                :label="option.body"
+                value=""
+              ></v-radio>
+            </v-radio-group>
+          </v-container>
+          <v-container v-if="question.type === 'TEXT'"
+            ><v-text-field outlined />
+          </v-container>
+          <v-container v-if="question.type === 'SINGLE_CHOICE'">
+            <v-radio-group v-model="radios" :mandatory="false">
+              <v-radio
+                v-for="(option, index) in question.options"
+                :key="index"
+                :label="option.body"
+                value=""
+              ></v-radio>
+            </v-radio-group>
+          </v-container>
+
+          <v-container v-if="question.type === 'MULTI_CHOICE'">
+            <v-checkbox
+              v-for="(option, index) in question.options"
+              :key="index"
+              :label="option.body"
+              value="John"
+            ></v-checkbox>
+          </v-container>
+        </v-card-text>
+        <v-card-action>
+          <v-btn
+            text
+            color="warning"
+            v-on:click="editQuestion(question, index)"
+          >
+            Editar
+          </v-btn>
+          <v-btn
+            text
+            color="error"
+            v-on:click="deleteQuestion(question, index)"
+          >
+            eliminar
+          </v-btn>
+        </v-card-action>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 // import _ from 'lodash';
-import vueSlider from 'vue-slider-component';
-import SurveyBuilder from './SurveyBuilder';
+import vueSlider from "vue-slider-component";
+import SurveyBuilder from "./SurveyBuilder";
 export default {
-  name: 'QuestionsView',
+  name: "QuestionsView",
   data() {
     return {
       selectedQuestion: { id: null },
     };
   },
-  props: ['questions', 'readOnly'],
+  props: ["questions", "readOnly"],
   components: { SurveyBuilder, vueSlider },
   mounted() {
-    this.$root.$on('selected-question', obj => {
+    this.$root.$on("selected-question", (obj) => {
       window.console.log(obj);
       this.selectedQuestion = { id: null };
     });
