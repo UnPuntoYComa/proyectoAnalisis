@@ -132,14 +132,14 @@
               </v-container>
             </div>
           </v-card-text>
-          <v-card-action>
+          <v-card-actions>
             <v-btn text color="warning" @click="saveQuestion(question)">
               guardar
             </v-btn>
             <v-btn text color="error" @click="cancelQuestion(question)">
               cancelar</v-btn
             >
-          </v-card-action>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>

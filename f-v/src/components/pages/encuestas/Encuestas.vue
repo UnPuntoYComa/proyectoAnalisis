@@ -1,93 +1,105 @@
 <template>
-  <v-container>
-    <v-row justify="space-around">
-      <v-card width="400">
-        <v-img
-          height="200px"
-          src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
-        >
-          <v-app-bar flat color="rgba(0, 0, 0, 0)">
-            <v-toolbar-title class="title white--text pl-0">
-              Titulo encuesta
-            </v-toolbar-title>
-
-            <v-spacer></v-spacer>
-
-            <v-btn color="white" icon> </v-btn>
-          </v-app-bar>
-
-          <v-card-title class="white--text mt-8">
-            <v-avatar size="56">
-              <img
-                alt="user"
-                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-              />
-            </v-avatar>
-            <p class="ml-3">Creador encuesta</p>
+  <v-row justify="center">
+    <v-col cols="12" md="4" v-for="(question, index) in questions" :key="index">
+      <v-card
+        v-if="selectedQuestion.id !== question.id"
+        width="100%"
+        height="100%"
+        elevation="12"
+      >
+        <div class="question-section">
+          <v-card-title>
+            Pregunta
+            <span class="">{{ index + 1 }}:</span>
           </v-card-title>
-        </v-img>
-
+        </div>
+        <v-card-subtitle class="body-1">
+          {{ question.body }}
+        </v-card-subtitle>
         <v-card-text>
-          <div class="font-weight-bold ml-8 mb-2">Today</div>
+          <v-container v-if="question.type === 'BOOLEAN'">
+            <v-radio-group v-model="radios" :mandatory="false">
+              <v-radio
+                v-for="(option, index) in question.options"
+                :key="index"
+                :label="option.body"
+                value=""
+              ></v-radio>
+            </v-radio-group>
+          </v-container>
+          <v-container v-if="question.type === 'TEXT'"
+            ><v-text-field outlined />
+          </v-container>
+          <v-container v-if="question.type === 'SINGLE_CHOICE'">
+            <v-radio-group v-model="radios" :mandatory="false">
+              <v-radio
+                v-for="(option, index) in question.options"
+                :key="index"
+                :label="option.body"
+                value=""
+              ></v-radio>
+            </v-radio-group>
+          </v-container>
 
-          <v-timeline align-top dense>
-            <v-timeline-item
-              v-for="message in messages"
-              :key="message.time"
-              :color="message.color"
-              small
-            >
-              <div>
-                <div class="font-weight-normal">
-                  <strong>{{ message.from }}</strong> @{{ message.time }}
-                </div>
-                <div>{{ message.message }}</div>
-              </div>
-            </v-timeline-item>
-          </v-timeline>
+          <v-container v-if="question.type === 'MULTI_CHOICE'">
+            <v-checkbox
+              v-for="(option, index) in question.options"
+              :key="index"
+              :label="option.body"
+              value="John"
+            ></v-checkbox>
+          </v-container>
         </v-card-text>
+        <!-- <v-card-actions>
+          <v-btn
+            text
+            color="warning"
+            v-on:click="editQuestion(question, index)"
+          >
+            Editar
+          </v-btn>
+          <v-btn
+            text
+            color="error"
+            v-on:click="deleteQuestion(question, index)"
+          >
+            eliminar
+          </v-btn>
+        </v-card-actions> -->
       </v-card>
-    </v-row>
-  </v-container>
+    </v-col>
+  </v-row>
 </template>
-<script>
-export default {
-  data: () => ({
-    messages: [
-      {
-        from: "You",
-        message: "Sure, I'll see you later.",
-        time: "10:42am",
-        color: "deep-purple lighten-1",
-      },
-      {
-        from: "John Doe",
-        message: "Yeah, sure. Does 1:00pm work?",
-        time: "10:37am",
-        color: "green",
-      },
-      {
-        from: "You",
-        message: "Did you still want to grab lunch today?",
-        time: "9:47am",
-        color: "deep-purple lighten-1",
-      },
-    ],
 
-    encuesta: {
-      title: "titulo",
-      preguntas: [
-        {
-          pregunta: "klsahdf",
-          type: "multiple",
-          opciones: ["opcion1", "opcion2"],
-        },
-        {
-          pregunta: "pregunta2",
-          type: "texto",
-        },
-      ],
+<script>
+// import _ from 'lodash';
+import vueSlider from "vue-slider-component";
+export default {
+  name: "encuestas",
+  data() {
+    return {
+      selectedQuestion: { id: null },
+      radios: true
+    };
+  },
+  props: ["questions", "readOnly"],
+  components: { vueSlider },
+  mounted() {
+    this.$root.$on("selected-question", (obj) => {
+      window.console.log(obj);
+      this.selectedQuestion = { id: null };
+    });
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    editQuestion(question, index) {
+      this.selectedQuestion = JSON.parse(JSON.stringify(question));
+      this.selectedQuestion.questionNumber = index + 1;
     },
-  }),
+    deleteQuestion(question, index) {
+      this.questions.splice(index, 1);
+    },
+  },
 };
 </script>

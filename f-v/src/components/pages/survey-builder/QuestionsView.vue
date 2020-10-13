@@ -54,7 +54,7 @@
             ></v-checkbox>
           </v-container>
         </v-card-text>
-        <v-card-action>
+        <v-card-actions>
           <v-btn
             text
             color="warning"
@@ -69,7 +69,7 @@
           >
             eliminar
           </v-btn>
-        </v-card-action>
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>

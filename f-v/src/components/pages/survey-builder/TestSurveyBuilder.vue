@@ -12,6 +12,8 @@
     <v-card-actions v-if="questionsList.length > 0">
       <v-btn color="orange" text> Guardar </v-btn>
     </v-card-actions>
+    
+    <p>{{questionsList}} </p>
   </v-container>
 </template>
 
