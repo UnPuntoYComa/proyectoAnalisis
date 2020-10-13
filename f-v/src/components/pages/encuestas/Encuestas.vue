@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" md="4" v-for="(question, index) in questions" :key="index">
+    <v-col cols="12" md="6" v-for="(question, index) in questions" :key="index">
       <v-card
         v-if="selectedQuestion.id !== question.id"
         width="100%"

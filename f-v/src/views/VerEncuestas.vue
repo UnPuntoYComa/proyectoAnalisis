@@ -2,23 +2,28 @@
   <v-container>
     <h2 class="text-center text-h2 my-5">Encuestas</h2>
     <v-row justify="center">
+      <v-col cols="12" md="3">
+        <v-text-field v-model="search" label="Busqueda" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
       <v-col
         cols="12"
         md="6"
-        v-for="(encuesta, index) in encuestas"
+        v-for="(encuesta, index) in searchEncuesta"
         :key="index"
       >
         <v-card>
-          <v-card-title>
-            {{ encuesta.title }}
-          </v-card-title>
+          <v-img height="150px" src="https://picsum.photos/720/1080">
+            <v-card-title class="white--text mt-8 text-h4">
+              {{ encuesta.title }}
+            </v-card-title>
+          </v-img>
           <v-card-text>
             <Encuesta :questions="encuesta.preguntas" :readOnly="false" />
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" block text x-large>
-              enviar
-            </v-btn>
+            <v-btn color="primary" block text x-large> enviar </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -36,6 +41,7 @@ export default {
   },
   data() {
     return {
+      search: "",
       encuestas: [
         {
           title: "ENCUESTA 1",
@@ -319,6 +325,15 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    searchEncuesta: function () {
+      let filterSearch = this.search.toLowerCase();
+
+      return this.encuestas.filter((item) => {
+        return item.title.toLowerCase().includes(filterSearch);
+      });
+    },
   },
 };
 </script>
