@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <h2 class="text-center text-h2 my-5">Encuestas</h2>
     <v-row justify="center">
       <v-col cols="12" md="3">
@@ -13,7 +13,7 @@
         v-for="(encuesta, index) in searchEncuesta"
         :key="index"
       >
-        <v-card>
+        <v-card width="">
           <v-img height="150px" src="https://picsum.photos/720/1080">
             <v-card-title class="white--text mt-8 text-h4">
               {{ encuesta.title }}
