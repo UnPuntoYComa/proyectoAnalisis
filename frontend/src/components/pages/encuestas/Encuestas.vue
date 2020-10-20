@@ -50,22 +50,6 @@
             ></v-checkbox>
           </v-container>
         </v-card-text>
-        <!-- <v-card-actions>
-          <v-btn
-            text
-            color="warning"
-            v-on:click="editQuestion(question, index)"
-          >
-            Editar
-          </v-btn>
-          <v-btn
-            text
-            color="error"
-            v-on:click="deleteQuestion(question, index)"
-          >
-            eliminar
-          </v-btn>
-        </v-card-actions> -->
       </v-card>
     </v-col>
   </v-row>

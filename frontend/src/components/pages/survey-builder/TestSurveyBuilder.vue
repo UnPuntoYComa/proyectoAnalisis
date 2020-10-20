@@ -10,10 +10,27 @@
       <SurveyBuilder :options="sampleQuestion" />
     </div>
     <v-card-actions v-if="questionsList.length > 0">
-      <v-btn color="orange" text> Guardar </v-btn>
+      <v-btn color="orange" text @click="snackbar = true"> Guardar </v-btn>
     </v-card-actions>
-    
-    <p>{{questionsList}} </p>
+
+    <p>{{ questionsList }}</p>
+    <!-- snackbar de encuesta guardada exitosamente -->
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      vertical
+      elevation="10"
+      shaped
+      outlined
+      color="primary"
+    >
+      <div class="text-h6">{{ snackText }}</div>
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -23,11 +40,15 @@ import QuestionsView from "./QuestionsView";
 import sampleQuestionObj from "./survey-builder.json";
 export default {
   name: "TestSurveyBuilder",
+  components: { SurveyBuilder, QuestionsView },
   data() {
     return {
       questionsList: [],
       addQuestion: false,
       array: [],
+      snackbar: false,
+      snackText: "Encuesta guardada exitosamente",
+      timeout: 2000,
     };
   },
   mounted() {
@@ -35,7 +56,6 @@ export default {
       this.updateQuestionsList(q);
     });
   },
-  components: { SurveyBuilder, QuestionsView },
   methods: {
     updateQuestionsList(question) {
       const questionIndex = this.questionsList.findIndex(
