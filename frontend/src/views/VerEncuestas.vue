@@ -15,9 +15,16 @@
       >
         <v-card width="">
           <v-img height="150px" src="https://picsum.photos/720/1080">
-            <v-card-title class="white--text mt-8 text-h4">
+            <v-card-title class="white--text mt-6 text-h4">
               {{ encuesta.nombre_encuesta}}
             </v-card-title>
+            <v-row justify="space-around" align="center">
+            <v-card-subtitle>
+              <span>link:</span>
+            <router-link v-bind:to="'/encuesta/'+encuesta.id_encuesta">{{ "http://localhost:8080/encuesta/"+encuesta.id_encuesta}}</router-link>  
+            </v-card-subtitle>
+              <v-btn v-bind:to="'/encuesta/'+encuesta.id_encuesta">ir a encuesta</v-btn>
+            </v-row>  
           </v-img>
           <v-card-text>
             <Encuesta :questions="encuesta.preguntas" :readOnly="false" />

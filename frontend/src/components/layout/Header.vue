@@ -100,4 +100,6 @@ export default {
 h1 {
   color: rgb(0, 0, 0);
 }
+
+
 </style>
