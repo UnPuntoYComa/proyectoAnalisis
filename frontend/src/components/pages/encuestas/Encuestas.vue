@@ -14,38 +14,38 @@
           </v-card-title>
         </div>
         <v-card-subtitle class="body-1">
-          {{ question.body }}
+          {{ question.texto_pregunta }}
         </v-card-subtitle>
         <v-card-text>
-          <v-container v-if="question.type === 'BOOLEAN'">
+          <v-container v-if="question.modo_respuesta === 'BOOLEAN'">
             <v-radio-group v-model="radios" :mandatory="false">
               <v-radio
-                v-for="(option, index) in question.options"
+                v-for="(option, index) in question.opcion_respuesta"
                 :key="index"
-                :label="option.body"
+                :label="option.texto"
                 value=""
               ></v-radio>
             </v-radio-group>
           </v-container>
-          <v-container v-if="question.type === 'TEXT'"
+          <v-container v-if="question.modo_respuesta === 'TEXT'"
             ><v-text-field outlined />
           </v-container>
-          <v-container v-if="question.type === 'SINGLE_CHOICE'">
+          <v-container v-if="question.modo_respuesta === 'SINGLE_CHOICE'">
             <v-radio-group v-model="radios" :mandatory="false">
               <v-radio
-                v-for="(option, index) in question.options"
+                v-for="(option, index) in question.opcion_respuesta"
                 :key="index"
-                :label="option.body"
+                :label="option.texto"
                 value=""
               ></v-radio>
             </v-radio-group>
           </v-container>
 
-          <v-container v-if="question.type === 'MULTI_CHOICE'">
+          <v-container v-if="question.modo_respuesta === 'MULTI_CHOICE'">
             <v-checkbox
-              v-for="(option, index) in question.options"
+              v-for="(option, index) in question.opcion_respuesta"
               :key="index"
-              :label="option.body"
+              :label="option.texto"
               value="John"
             ></v-checkbox>
           </v-container>
@@ -74,6 +74,7 @@
 <script>
 // import _ from 'lodash';
 import vueSlider from "vue-slider-component";
+import axios from "axios";
 export default {
   name: "encuestas",
   data() {
@@ -81,7 +82,7 @@ export default {
       selectedQuestion: { id: null },
       radios: true
     };
-  },
+  },  
   props: ["questions", "readOnly"],
   components: { vueSlider },
   mounted() {
@@ -100,6 +101,7 @@ export default {
     deleteQuestion(question, index) {
       this.questions.splice(index, 1);
     },
-  },
+    }
+
 };
 </script>
