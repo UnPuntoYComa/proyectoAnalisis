@@ -20,6 +20,7 @@
     "vue-jwt-decode": "^0.1.0",
     "vue-router": "^3.4.6",
     "vue-survey-builder": "^0.2.0",
+    "vuedraggable": "^2.24.2",
     "vuetify": "^2.3.13",
     "vuex": "^3.5.1"
   },

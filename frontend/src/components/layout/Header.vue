@@ -5,8 +5,7 @@
     dark
     src="https://picsum.photos/1920/1080?random"
     app
-    prominent
-    
+    prominent 
   >
     <template v-slot:img="{ props }">
       <v-img
