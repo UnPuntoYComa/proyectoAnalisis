@@ -30,6 +30,10 @@ const routes = [
     path: '/encuesta/:id', 
     name: 'encuestaId',
     component: () => import(/* webpackChunkName: "proyecto" */ '../views/VerEncuesta.vue') 
+  },{
+    path: '/done',
+    name: 'done',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Done.vue')
   },
   {
     path: '/crear-encuesta',

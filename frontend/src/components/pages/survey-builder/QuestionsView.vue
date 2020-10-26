@@ -1,93 +1,105 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" md="4" v-for="(question, index) in questions" :key="index">
-      <div v-if="selectedQuestion.id === question.id">
-        <SurveyBuilder :options="selectedQuestion"></SurveyBuilder>
-      </div>
-
-      <v-card
-        v-if="selectedQuestion.id !== question.id"
-        width="100%"
-        height="100%"
-        elevation="12"
+    <draggable
+      :list="questions"
+      group="questions"
+      class="kanban-column"
+    >
+      <v-col
+        cols="12"
+        md="12"
+        v-for="(question, index) in questions"
+        :key="index"
       >
-        <div class="question-section">
-          <v-card-title>
-            Pregunta
-            <span class="">{{ index + 1 }}:</span>
-          </v-card-title>
+        <div v-if="selectedQuestion.id === question.id">
+          <SurveyBuilder :options="selectedQuestion"></SurveyBuilder>
         </div>
-        <v-card-subtitle class="body-1">
-          {{ question.body }}
-        </v-card-subtitle>
-        <v-card-text>
-          <v-container v-if="question.type === 'BOOLEAN'">
-            <v-radio-group v-model="radios" :mandatory="false">
-              <v-radio
-                v-for="(option, index) in question.options"
-                :key="index"
-                :label="option.body"
-                value=""
-              ></v-radio>
-            </v-radio-group>
-          </v-container>
-          <v-container v-if="question.type === 'TEXT'"
-            ><v-text-field outlined />
-          </v-container>
-          <v-container v-if="question.type === 'SINGLE_CHOICE'">
-            <v-radio-group v-model="radios" :mandatory="false">
-              <v-radio
-                v-for="(option, index) in question.options"
-                :key="index"
-                :label="option.body"
-                value=""
-              ></v-radio>
-            </v-radio-group>
-          </v-container>
 
-          <v-container v-if="question.type === 'MULTI_CHOICE'">
-            <v-checkbox
-              v-for="(option, index) in question.options"
-              :key="index"
-              :label="option.body"
-              value="John"
-            ></v-checkbox>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            text
-            color="warning"
-            v-on:click="editQuestion(question, index)"
-          >
-            Editar
-          </v-btn>
-          <v-btn
-            text
-            color="error"
-            v-on:click="deleteQuestion(question, index)"
-          >
-            eliminar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
+        <v-card
+          v-if="selectedQuestion.id !== question.id"
+          width="100%"
+          height="100%"
+          elevation="12"
+        >
+          <div class="question-section">
+            <v-card-title>
+              <span class="">{{ index + 1 }}</span>-Pregunta
+            </v-card-title>
+          </div>
+          <v-card-subtitle class="body-1">
+            {{ question.body }}
+          </v-card-subtitle>
+          <v-card-text>
+            <v-container v-if="question.type === 'BOOLEAN'">
+              <v-radio-group v-model="radios" :mandatory="false">
+                <v-radio
+                  v-for="(option, index) in question.options"
+                  :key="index"
+                  :label="option.body"
+                  value=""
+                ></v-radio>
+              </v-radio-group>
+            </v-container>
+            <v-container v-if="question.type === 'TEXT'"
+              ><v-text-field outlined />
+            </v-container>
+            <v-container v-if="question.type === 'SINGLE_CHOICE'">
+              <v-radio-group v-model="radios" :mandatory="false">
+                <v-radio
+                  v-for="(option, index) in question.options"
+                  :key="index"
+                  :label="option.body"
+                  value=""
+                ></v-radio>
+              </v-radio-group>
+            </v-container>
+
+            <v-container v-if="question.type === 'MULTI_CHOICE'">
+              <v-checkbox
+                v-for="(option, index) in question.options"
+                :key="index"
+                :label="option.body"
+                value="John"
+              ></v-checkbox>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              text
+              color="warning"
+              v-on:click="editQuestion(question, index)"
+            >
+              Editar
+            </v-btn>
+            <v-btn
+              text
+              color="error"
+              v-on:click="deleteQuestion(question, index)"
+            >
+              eliminar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </draggable>
   </v-row>
 </template>
 
 <script>
-// import _ from 'lodash';
+import draggable from "vuedraggable";
 import vueSlider from "vue-slider-component";
 import SurveyBuilder from "./SurveyBuilder";
 export default {
   name: "QuestionsView",
+
+  props: ["questions", "readOnly"],
   data() {
     return {
       selectedQuestion: { id: null },
+      radios: ""
     };
   },
-  props: ["questions", "readOnly"],
-  components: { SurveyBuilder, vueSlider },
+  components: { SurveyBuilder, vueSlider, draggable },
   mounted() {
     this.$root.$on("selected-question", (obj) => {
       window.console.log(obj);
@@ -109,6 +121,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.kanban-column {
+  min-height: 100px;
+  min-width: 50%;
+}
 $color-primary: #f8f8f8;
 $color-secondary: #eaf0f4;
 $color-blue: #4c8ce4;

@@ -6,11 +6,8 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
      },usuario_id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
       },res_texto:{
         type:Sequelize.STRING,
-      },res_fecha:{
-        type: Sequelize.DATE,
       },id_pregunta:{
         type: Sequelize.INTEGER,
       },

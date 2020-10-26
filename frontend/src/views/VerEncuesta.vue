@@ -17,9 +17,7 @@
           <v-card-text>
             <Encuesta :questions="encuesta.preguntas" :readOnly="false" />
           </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" block text x-large> enviar </v-btn>
-          </v-card-actions>
+
         </v-card>
       </v-col>
     </v-row>

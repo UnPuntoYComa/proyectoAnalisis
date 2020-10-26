@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes";
 import usuario from "./routes/usuario";
 import encuesta from "./routes/encuesta";
 import pregunta from "./routes/pregunta";
+import respuestas from "./routes/respuestas";
 //BD
 //import {initial} from './libs/initialSetup'
 const db = require("./database");
@@ -41,5 +42,6 @@ app.use("/api/auth", authRoutes);
 app.use('/api/usuario',usuario);
 app.use('/api/encuesta',encuesta);
 app.use('/api/pregunta',pregunta);
+app.use('/api/respuestas',respuestas);
 
 export default app;

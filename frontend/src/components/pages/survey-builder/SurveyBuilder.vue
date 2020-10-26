@@ -151,11 +151,12 @@ export default {
   name: "SurveyBuilder",
   data() {
     return {
+      
       questionTypes: [
-        { value: "DEFAULT", text: "- Select a question type -" },
-        { value: "BOOLEAN", text: "Yes or No" },
-        { value: "MULTI_CHOICE", text: "Multiple Choice" },
-        { value: "SINGLE_CHOICE", text: "Single Choice" },
+        { value: "DEFAULT", text: "- selecciona un tipo de pregunta -" },
+        { value: "BOOLEAN", text: "Si o No" },
+        { value: "MULTI_CHOICE", text: "Opcion Multiple" },
+        { value: "SINGLE_CHOICE", text: "Unica Opción" },
         { value: "TEXT", text: "Text" },
       ],
       question: this.options,
