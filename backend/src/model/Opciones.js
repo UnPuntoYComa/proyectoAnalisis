@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Encuesta = sequelize.define("opcion_respuesta", {
+    const Opciones = sequelize.define("opcion_respuesta", {
         id_opcion: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -7,10 +7,10 @@ module.exports = (sequelize, Sequelize) => {
      },texto: {
         type: Sequelize.STRING,
       },id_pregunta:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
       }
     });
-    return Encuesta;
+    return Opciones;
   };
   
   

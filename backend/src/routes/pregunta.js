@@ -6,8 +6,17 @@ router.get('/',async (req,res)=>{
     res.json(preguntas);
 })
 router.post('/',async (req,res)=>{
-    const pregunta = await db.pregunta.create(req.body);
-    res.json(pregunta);
+    req.body.datos.forEach(async(dato,index)=>{
+    const pregunta = await db.pregunta.create({modo_respuesta:dato.type,texto_pregunta:dato.body,orden:index,id_encuesta:req.body.id_encuesta});
+        console.log(pregunta.dataValues.id_pregunta);
+        let idPregunta=pregunta.dataValues.id_pregunta;
+        dato.options.forEach(async opcion=>{
+            if(opcion.body!==null){
+                const pregunta = await db.opciones.create({texto:opcion.body,id_pregunta:idPregunta});
+            }
+        });
+        });
+    res.json("creado exitosamente");
 })
 router.post('/opcion',async (req,res)=>{
     const encuesta = await db.opciones.create(req.body);

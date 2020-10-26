@@ -27,6 +27,8 @@ db.user = require("./model/User")(sequelize, Sequelize);
 db.encuesta = require("./model/Encuesta")(sequelize, Sequelize);
 db.pregunta = require("./model/Preguntas")(sequelize, Sequelize);
 db.opciones = require("./model/Opciones")(sequelize, Sequelize);
+db.respuestas= require("./model/Respuestas")(sequelize, Sequelize);
+db.encuestado= require("./model/Encuestado")(sequelize, Sequelize);
 
 //relaciones
 //usuario a encuesta
@@ -38,5 +40,8 @@ db.encuesta.hasMany(db.pregunta,{ foreignKey:"id_encuesta"});
  //preguntas a opciones
  db.pregunta.hasMany(db.opciones,{ foreignKey:"id_pregunta"});  
  db.opciones.belongsTo(db.pregunta,{ foreignKey : 'id_pregunta'});
+//encuestado a respuestas
+db.encuestado.hasMany(db.respuestas,{ foreignKey:"id_encuestado"});  
+db.respuestas.belongsTo(db.encuestado,{ foreignKey : 'usuario_id'});
 
 module.exports = db;

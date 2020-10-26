@@ -17,7 +17,9 @@ router.get('/:id',async (req,res)=>{
     res.json(encuesta);
 })
 router.post('/',async (req,res)=>{
-    const encuesta = await db.encuesta.create(req.body);
+    var fechaActual = new Date().toISOString().slice(0,10);
+    const encuesta = await db.encuesta.create({nombre_encuesta:req.body.nombre,fecha:fechaActual,descripcion:req.body.descripcion,estado_encuesta:req.body.estado,id_usuario:req.body.user});
+    console.log(encuesta);
     res.json(encuesta);
 })
 

@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
     },nombre_encuesta:{
       type:Sequelize.STRING,
     },fecha:{
-      type: Sequelize.DATE,
+      type: Sequelize.DATEONLY,
     },descripcion:{
       type: Sequelize.STRING,
     },estado_encuesta:{

@@ -9,49 +9,50 @@
       >
         <div class="question-section">
           <v-card-title>
-            Pregunta
-            <span class="">{{ index + 1 }}:</span>
+            {{ question.texto_pregunta }}
           </v-card-title>
         </div>
-        <v-card-subtitle class="body-1">
-          {{ question.texto_pregunta }}
-        </v-card-subtitle>
         <v-card-text>
           <v-container v-if="question.modo_respuesta === 'BOOLEAN'">
-            <v-radio-group v-model="radios" :mandatory="false">
+            <v-radio-group v-model="respuestas[index]['value'][0]" :mandatory="false">
               <v-radio
                 v-for="(option, index) in question.opcion_respuesta"
                 :key="index"
                 :label="option.texto"
-                value=""
+                :value="option.texto"
               ></v-radio>
             </v-radio-group>
           </v-container>
           <v-container v-if="question.modo_respuesta === 'TEXT'"
-            ><v-text-field outlined />
+            ><v-text-field outlined v-model="respuestas[index]['value'][0]"/>
           </v-container>
           <v-container v-if="question.modo_respuesta === 'SINGLE_CHOICE'">
-            <v-radio-group v-model="radios" :mandatory="false">
+            <v-radio-group v-model="respuestas[index]['value'][0]" :mandatory="false">
               <v-radio
                 v-for="(option, index) in question.opcion_respuesta"
                 :key="index"
                 :label="option.texto"
-                value=""
+                :value="option.texto"
               ></v-radio>
             </v-radio-group>
           </v-container>
-
           <v-container v-if="question.modo_respuesta === 'MULTI_CHOICE'">
             <v-checkbox
-              v-for="(option, index) in question.opcion_respuesta"
-              :key="index"
+            v-for="(option, i) in question.opcion_respuesta"
+            v-model="respuestas[index]['value'][i]"
+              :key="i"
               :label="option.texto"
-              value="John"
+              :value="option.texto"        
             ></v-checkbox>
           </v-container>
         </v-card-text>
       </v-card>
     </v-col>
+    <v-col>
+    <v-card-actions>
+           <v-btn color="primary" v-on:click="handleEnvio" block text x-large> enviar </v-btn>
+    </v-card-actions>
+  </v-col>
   </v-row>
 </template>
 
@@ -64,7 +65,7 @@ export default {
   data() {
     return {
       selectedQuestion: { id: null },
-      radios: true
+      respuestas:[],
     };
   },  
   props: ["questions", "readOnly"],
@@ -85,7 +86,29 @@ export default {
     deleteQuestion(question, index) {
       this.questions.splice(index, 1);
     },
+    async handleEnvio(){
+      try{
+    let res = await this.$http.post("/api/respuestas/",{
+      respuestas:this.respuestas,
+      })
+    res.data.forEach( items=>{
+        items.preguntas.sort(function (a, b) {
+          if (a.orden > b.orden) {
+            return 1;
+          }  
+        });
+      }
+      );
+      this.encuesta= res.data;
+      this.$router.push("/done");
+    } catch (e){
+        console.log(e);
+      }
     }
-
+    },created(){
+    this.questions.forEach((pregunta,index)=>{
+      this.respuestas.push({value:[],idPregunta:pregunta.id_pregunta})
+    });
+  }
 };
 </script>
