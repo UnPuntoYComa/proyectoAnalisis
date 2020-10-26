@@ -5,7 +5,7 @@
     dark
     src="https://picsum.photos/1920/1080?random"
     app
-    prominent 
+    prominent
   >
     <template v-slot:img="{ props }">
       <v-img
@@ -14,12 +14,33 @@
       ></v-img>
     </template>
 
-    <v-toolbar-title class="text-h4">Proyecto Analisis de Sistemas II</v-toolbar-title>
-    <v-row justify="center" class="flex-nowrap pa-0">
-      <v-col>
-        <v-row justify="center"class="flex-nowrap pa-0">
-          <v-col >
-            <v-btn text to="/" exact class="pa-0">
+    <v-toolbar-title class="text-h4"
+      >Proyecto Analisis de Sistemas II
+      <div class=" d-inline">
+        <v-tooltip v-if="!$vuetify.theme.dark" bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" text small fab @click="darkMode">
+              <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
+            </v-btn>
+          </template>
+          <span>Dark Mode On</span>
+        </v-tooltip>
+
+        <v-tooltip v-else bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" text small fab @click="darkMode">
+              <v-icon color="yellow">mdi-white-balance-sunny</v-icon>
+            </v-btn>
+          </template>
+          <span>Dark Mode Off</span>
+        </v-tooltip>
+      </div></v-toolbar-title
+    >
+    <v-row justify="center">
+      <v-col cols="8">
+        <v-row justify="center">
+          <v-col cols="2" class="mx-2">
+            <v-btn text to="/" exact>
               <v-icon>mdi-home</v-icon>
               HOME
             </v-btn>
@@ -76,9 +97,7 @@ import { mapState, mapMutations, Store } from "vuex";
 
 export default {
   name: "Header",
-  props: {
-   
-  },
+  props: {},
   data() {
     return {
       condicion: null,
@@ -88,9 +107,12 @@ export default {
     logUserOut() {
       localStorage.removeItem("jwt");
       this.$router.push("/signin");
-       this.$store.commit("logout");
+      this.$store.commit("logout");
     },
     ...mapMutations(["logout"]),
+    darkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+    },
   },
   computed: { ...mapState(["logged"]) },
 };

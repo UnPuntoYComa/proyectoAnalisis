@@ -15,8 +15,8 @@
       >
         <v-card width="">
           <v-img height="150px" src="https://picsum.photos/720/1080">
-            <v-card-title class="white--text mt-6 text-h4">
-              {{ encuesta.nombre_encuesta}}
+            <v-card-title class="white--text mt-8 text-h4">
+              {{ encuesta.nombre_encuesta }}
             </v-card-title>
             <v-row justify="space-around" align="center">
             <v-card-subtitle>
@@ -58,24 +58,23 @@ export default {
       });
     },
   },
-  methods: {
-    
-  },async created(){
-      try{
+  methods: {},
+  async created() {
+    try {
       const res = await axios.get("http://localhost:4000/api/encuesta/");
-      res.data.forEach( items=>{
+      res.data.forEach((items) => {
         items.preguntas.sort(function (a, b) {
           if (a.orden > b.orden) {
             return 1;
-          }  
+          }
         });
-      }
-      );
-      this.encuesta= res.data;
-        console.log(this.encuesta);
-    } catch (e){
-        console.log(e);
-    }}
+      });
+      this.encuesta = res.data;
+      console.log(this.encuesta);
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };
 </script>
 
