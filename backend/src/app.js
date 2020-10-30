@@ -11,12 +11,12 @@ import pregunta from "./routes/pregunta";
 //BD
 //import {initial} from './libs/initialSetup'
 const db = require("./database");
-db.sequelize.sync().then(() => { //sync({force: true}) para eliminar la tabla y syncronizar de nuevo
-  console.log('Sync Db');
-  //initial(); //crea los usuarios iniciales
-},(error)=> {
-  console.log(error);
-});
+// db.sequelize.sync().then(() => { //sync({force: true}) para eliminar la tabla y syncronizar de nuevo
+//   console.log('Sync Db');
+//   //initial(); //crea los usuarios iniciales
+// },(error)=> {
+//   console.log(error);
+// });
 
 //initial setup
 const app = express();

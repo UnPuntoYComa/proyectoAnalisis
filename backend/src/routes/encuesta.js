@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 const db = require('../database');
 const router = Router();
 router.get('/',async (req,res)=>{
