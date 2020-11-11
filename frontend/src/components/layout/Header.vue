@@ -16,7 +16,7 @@
 
     <v-toolbar-title class="text-h4"
       >Proyecto Analisis de Sistemas II
-      <div class=" d-inline">
+      <div class="d-inline">
         <v-tooltip v-if="!$vuetify.theme.dark" bottom>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" text small fab @click="darkMode">
@@ -34,62 +34,38 @@
           </template>
           <span>Dark Mode Off</span>
         </v-tooltip>
-      </div></v-toolbar-title
-    >
-    <v-row justify="center">
-      <v-col cols="8">
-        <v-row justify="center">
-          <v-col cols="2" class="mx-2">
-            <v-btn text to="/" exact>
-              <v-icon>mdi-home</v-icon>
-              HOME
-            </v-btn>
-          </v-col>
-          <v-col >
-            <v-btn text to="/encuestas" class="pa-0">
-              <v-icon>mdi-clipboard-check-multiple</v-icon>
-              encuestas
-            </v-btn>
-          </v-col>
-          <v-col  v-if="logged">
-            <v-btn text to="/crear-encuesta" class="pa-0">
-              <v-icon>mdi-clipboard-plus</v-icon>
-              Crear encuesta
-            </v-btn>
-          </v-col>
-          <v-col  v-if="logged">
-            <v-btn text to="/estadisticas" class="pa-0">
-              <v-icon>mdi-chart-bar</v-icon>
-              Estadisticas
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col >
-        <v-row justify="end" v-if="!logged">
-          <v-col cols="4" class="mx-4">
-            <v-btn text to="/signin">
-              <v-icon>mdi-account</v-icon>
-              signin
-            </v-btn>
-          </v-col>
-          <v-col cols="4" class="mx-4">
-            <v-btn text to="/signup">
-              <v-icon>mdi-account-plus</v-icon>
-              Signup
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row justify="start" v-if="logged">
-          <v-col cols="4">
-            <v-btn text @click="logUserOut">
-              <v-icon>mdi-logout</v-icon>
-              Logout
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+      </div>
+    </v-toolbar-title>
+    <div class="nav">
+      <v-btn text to="/" exact>
+        <v-icon>mdi-home</v-icon>
+        HOME
+      </v-btn>
+      <v-btn text to="/encuestas" class="pa-0">
+        <v-icon>mdi-clipboard-check-multiple</v-icon>
+        encuestas
+      </v-btn>
+      <v-btn v-if="logged" text to="/crear-encuesta" class="pa-0">
+        <v-icon>mdi-clipboard-plus</v-icon>
+        Crear encuesta
+      </v-btn>
+      <v-btn v-if="logged" text to="/estadisticas" class="pa-0">
+        <v-icon>mdi-chart-bar</v-icon>
+        Estadisticas
+      </v-btn>
+      <v-btn v-if="!logged" text to="/signin">
+        <v-icon>mdi-account</v-icon>
+        signin
+      </v-btn>
+      <v-btn v-if="!logged" text to="/signup">
+        <v-icon>mdi-account-plus</v-icon>
+        Signup
+      </v-btn>
+      <v-btn v-if="logged" text @click="logUserOut">
+        <v-icon>mdi-logout</v-icon>
+        Logout
+      </v-btn>
+    </div>
   </v-app-bar>
 </template>
 <script>
@@ -121,6 +97,7 @@ export default {
 h1 {
   color: rgb(0, 0, 0);
 }
-
-
+.nav .v-btn {
+  margin: 0.8rem 1rem;
+}
 </style>
