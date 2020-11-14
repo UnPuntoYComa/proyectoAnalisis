@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 const db = require('../database');
 import { verifyToken } from "../middlewares/authJwt";
 
