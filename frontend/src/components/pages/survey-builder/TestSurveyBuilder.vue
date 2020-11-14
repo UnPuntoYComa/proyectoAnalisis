@@ -144,7 +144,7 @@ export default {
       let token = localStorage.getItem("jwt");
       let decoded = VueJwtDecode.decode(token);
       let user = decoded;
-      let response = await this.$http.post("/api/encuesta/",{ nombre:this.nombreEncuesta,descripcion:this.descripcionEncuesta,estado:this.switch1,user:user.id});
+      let response = await this.$http.post("/api/encuesta/",{nombre:this.nombreEncuesta,descripcion:this.descripcionEncuesta,estado:this.switch1,user:user.id});
       console.log(response);
       this.id_encuesta=response.data.id_encuesta;
       this.e1 = 2;
@@ -154,8 +154,10 @@ export default {
         datos:this.questionsList,
         id_encuesta:this.id_encuesta
       })
-      this.snackbar = true
-      this.$router.push("/encuestas");
+      if(response.data=="creado exitosamente"){
+        console.log(response.data);
+      this.snackbar = true;
+      }
     }
   },
 };

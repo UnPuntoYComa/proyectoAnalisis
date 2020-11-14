@@ -23,7 +23,7 @@
                 />
               </div>
               <v-container v-if="selectedType === 'BOOLEAN'">
-                <div class="vsb-choices-text">Answer Choices</div>
+                <div class="vsb-choices-text">Repuestas escogidas</div>
                 <div
                   class=""
                   v-for="(option, index) in question.options"
@@ -38,13 +38,13 @@
                       "
                       v-if="index > 1"
                     >
-                      Remove
+                      Eliminar
                     </button>
                   </div>
                 </div>
               </v-container>
               <v-container v-if="selectedType === 'MULTI_CHOICE'">
-                <div class="vsb-choices-text">Answer Choices</div>
+                <div class="vsb-choices-text">respuestas escogidas</div>
                 <div
                   class=""
                   v-for="(option, index) in question.options"
@@ -81,7 +81,7 @@
                 </v-row>
               </v-container>
               <v-container v-if="selectedType === 'SINGLE_CHOICE'">
-                <div class="vsb-choices-text">Answer Choices</div>
+                <div class="vsb-choices-text">respuesta escogida</div>
                 <div
                   class=""
                   v-for="(option, index) in question.options"

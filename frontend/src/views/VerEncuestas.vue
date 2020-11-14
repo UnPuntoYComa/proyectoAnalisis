@@ -18,13 +18,16 @@
             <v-card-title class="white--text mt-8 text-h4">
               {{ encuesta.nombre_encuesta }}
             </v-card-title>
-            <v-row justify="space-around" align="center">
             <v-card-subtitle>
+            <v-row justify="start" align="center">
               <span>link:</span>
-            <router-link v-bind:to="'/encuesta/'+encuesta.id_encuesta">{{ "http://localhost:8080/encuesta/"+encuesta.id_encuesta}}</router-link>  
-            </v-card-subtitle>
-              <v-btn v-bind:to="'/encuesta/'+encuesta.id_encuesta">ir a encuesta</v-btn>
-            </v-row>  
+            <router-link  ps="12" v-bind:to="'/encuesta/'+encuesta.id_encuesta">{{ "http://localhost:8080/encuesta/"+encuesta.id_encuesta}}</router-link>  
+          </v-row>  
+          <v-row justify="start" align="center">
+            <v-btn v-bind:to="'/encuesta/'+encuesta.id_encuesta">ir a encuesta</v-btn>
+            <v-btn @click="handleEliminar(encuesta)" color="red">eliminar</v-btn>
+          </v-row>  
+        </v-card-subtitle>
           </v-img>
           <v-card-text>
             <Encuesta :questions="encuesta.preguntas" :readOnly="false" />
@@ -58,7 +61,18 @@ export default {
       });
     },
   },
-  methods: {},
+  methods: {
+    async handleEliminar(encuesta) {
+    try {
+    await this.$http.delete("/api/encuesta/eliminar/"+encuesta.id_encuesta);
+    this.encuesta= this.encuesta.filter((encuestaAux)=>{
+      return encuestaAux.id_encuesta!=encuesta.id_encuesta});
+    console.log(encuesta);
+    } catch (e) {
+      console.log(e);
+    }
+},
+  },
   async created() {
     try {
       const res = await axios.get("http://localhost:4000/api/encuesta/");
@@ -74,9 +88,8 @@ export default {
     } catch (e) {
       console.log(e);
     }
-  },
-};
+  }
+}
 </script>
-
 <style>
 </style>
