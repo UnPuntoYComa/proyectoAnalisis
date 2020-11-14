@@ -90,15 +90,7 @@ export default {
       try{
     let res = await this.$http.post("/api/respuestas/",{
       respuestas:this.respuestas,
-      })
-    res.data.forEach( items=>{
-        items.preguntas.sort(function (a, b) {
-          if (a.orden > b.orden) {
-            return 1;
-          }  
-        });
-      }
-      );
+      });
       this.encuesta= res.data;
       this.$router.push("/done");
     } catch (e){

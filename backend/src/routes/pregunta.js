@@ -10,7 +10,7 @@ router.post('/',async (req,res)=>{
     const pregunta = await db.pregunta.create({modo_respuesta:dato.type,texto_pregunta:dato.body,orden:index,id_encuesta:req.body.id_encuesta});
         console.log(pregunta.dataValues.id_pregunta);
         let idPregunta=pregunta.dataValues.id_pregunta;
-        dato.options.forEach(async opcion=>{
+        await dato.options.forEach(async opcion=>{
             if(opcion.body!==null){
                 const pregunta = await db.opciones.create({texto:opcion.body,id_pregunta:idPregunta});
             }
