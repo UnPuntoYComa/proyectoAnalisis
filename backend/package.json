@@ -36,7 +36,9 @@
     "supertest": "^6.0.0"
   },
   "jest": {
-    "setupFilesAfterEnv": ["./src/tests/setupTests.js"],
+    "setupFilesAfterEnv": [
+      "./src/tests/setupTests.js"
+    ],
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"

@@ -28,15 +28,17 @@ export default {
         let decoded = VueJwtDecode.decode(token);
         this.user = decoded;
         if (this.user) {
+        console.log(this.user);
           this.$store.commit("login");
         }
       } catch (error) {
-        console.log("no te has loggeado");
+        console.log("");
       }
     },
   },
   created() {
     this.$vuetify.theme.dark = true;
+    document.title = "farmacia";
   },
   beforeUpdate() {
     this.getUserDetails();

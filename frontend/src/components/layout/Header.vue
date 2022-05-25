@@ -13,17 +13,27 @@
         gradient="to top right, rgba(0,0,0,.3), rgba(0,0,0,2.8)"
       ></v-img>
     </template>
-
-    <v-toolbar-title class="text-h4"
-      >Proyecto Analisis de Sistemas II
-      <div class="d-inline">
+    
+    <div class="nav">
+      
+    <v-toolbar-title class="text-h4" md=12>
+      <div class="d-inline d-flex justify-space-around align-center">
+                    <v-btn
+            v-if="logged"
+              @click.stop="drawer = !drawer"
+            >
+            <v-icon class="mr-1">mdi-menu</v-icon>
+            MENU
+          </v-btn>
+      Sistema Farmaceutico 
+        <div >
         <v-tooltip v-if="!$vuetify.theme.dark" bottom>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" text small fab @click="darkMode">
               <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
             </v-btn>
           </template>
-          <span>Dark Mode On</span>
+          <span>Modo Oscuro Prendido</span>
         </v-tooltip>
 
         <v-tooltip v-else bottom>
@@ -32,38 +42,153 @@
               <v-icon color="yellow">mdi-white-balance-sunny</v-icon>
             </v-btn>
           </template>
-          <span>Dark Mode Off</span>
+          <span>Modo Oscuro Apagado</span>
         </v-tooltip>
-      </div>
-    </v-toolbar-title>
-    <div class="nav">
-      <v-btn text to="/" exact>
-        <v-icon>mdi-home</v-icon>
-        HOME
-      </v-btn>
-      <v-btn text to="/encuestas" class="pa-0">
-        <v-icon>mdi-clipboard-check-multiple</v-icon>
-        encuestas
-      </v-btn>
-      <v-btn v-if="logged" text to="/crear-encuesta" class="pa-0">
-        <v-icon>mdi-clipboard-plus</v-icon>
-        Crear encuesta
-      </v-btn>
-      <v-btn v-if="logged" text to="/estadisticas" class="pa-0">
-        <v-icon>mdi-chart-bar</v-icon>
-        Estadisticas
-      </v-btn>
-      <v-btn v-if="!logged" text to="/signin">
+        </div>
+        <div>
+             <v-btn v-if="!logged" text to="/signin">
         <v-icon>mdi-account</v-icon>
-        signin
-      </v-btn>
-      <v-btn v-if="!logged" text to="/signup">
-        <v-icon>mdi-account-plus</v-icon>
-        Signup
+        Iniciar Sesión
       </v-btn>
       <v-btn v-if="logged" text @click="logUserOut">
         <v-icon>mdi-logout</v-icon>
-        Logout
+        Cerrar Sesión
+      </v-btn>
+      </div>
+      </div>
+      <v-navigation-drawer
+        v-model="drawer"
+        absolute="true"
+        height=100vh
+        temporary
+      >
+        <v-list-item>
+          <v-list-item-avatar>
+            <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+          </v-list-item-avatar>
+  
+          <v-list-item-content class="font-weight-black">
+            {{user.nombre}}
+            <v-list-item-title  >{{user.rol}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+  
+        <v-divider></v-divider>
+  
+        <v-list dense>
+          <v-list-item
+          >
+          <v-list-item-content>
+          <v-btn text to="/" class="pa-0 ma-0" exact>
+            <v-icon>mdi-home</v-icon>
+            HOME
+          </v-btn>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+          <v-list-item-content>
+            <v-btn text to="/vender" class="pa-0 ma-0" >
+              <v-icon>mdi-cash-multiple</v-icon>
+              vender
+            </v-btn>
+        </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+          <v-list-item-content>
+              <v-btn text to="/historialVentas" class="pa-0 ma-0" >
+                <v-icon>mdi-history</v-icon>
+                 Historial de ventas
+              </v-btn>
+          </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                  <v-btn text to="/inventario" class="pa-0 ma-0" >
+                    <v-icon>mdi-pill</v-icon>
+                     Inventario
+                  </v-btn>
+              </v-list-item-content>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-content>
+                      <v-btn text to="/medicine" class="pa-0 ma-0" >
+                        <v-icon>mdi-magnify</v-icon>
+                         Buscar producto
+                      </v-btn>
+                  </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item>
+                      <v-list-item-content>
+                          <v-btn text to="/cargarProducto" class="pa-0 ma-0" >
+                            <v-icon>mdi-briefcase-upload</v-icon>
+                             Cargar producto
+                          </v-btn>
+                      </v-list-item-content>
+                        </v-list-item>
+                    <v-list v-if="user.rol==='admin'" >
+      <v-list-group>
+        <template v-slot:activator>
+          <v-list-item-content small>
+            <v-list-item-title align="center" justify="center"> 
+            <v-icon>mdi-account</v-icon>
+            Proveedores
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
+                      <v-list-item>
+                      <v-list-item-content>
+                          <v-btn  text to="/proveedores" class="pa-0 ma-0" >
+                            <v-icon>mdi-account-supervisor</v-icon>
+                             Ver proveedores
+                          </v-btn>
+                      </v-list-item-content>
+                        </v-list-item>
+                                              <v-list-item>
+                      <v-list-item-content>
+                          <v-btn  text to="/crearProveedores" class="pa-0 ma-0" >
+                            <v-icon>mdi-account-plus</v-icon>
+                             Crear proveedores
+                          </v-btn>
+                      </v-list-item-content>
+                        </v-list-item>
+                              </v-list-group>
+    </v-list>
+                       <v-list v-if="user.rol==='admin'" >
+                      <v-list-group>
+                      <template v-slot:activator>
+          <v-list-item-content small>
+            <v-list-item-title align="center" justify="center"> 
+            <v-icon>mdi-account</v-icon>
+            Usuarios
+            </v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+                      <v-list-item>
+                      <v-list-item-content>
+                          <v-btn  text to="/verUsuario" class="pa-0 ma-0" >
+                            <v-icon>mdi-account-supervisor</v-icon>
+                             Ver usuarios
+                          </v-btn>
+                      </v-list-item-content>
+                        </v-list-item>
+                                              <v-list-item>
+                      <v-list-item-content>
+                          <v-btn  text to="/crearUsuario" class="pa-0 ma-0" >
+                            <v-icon>mdi-account-plus</v-icon>
+                             Crear usuarios
+                          </v-btn>
+                      </v-list-item-content>
+                        </v-list-item>
+      </v-list-group>
+    </v-list>
+        </v-list>
+      </v-navigation-drawer>
+
+    </v-toolbar-title>
+      <v-btn v-if="logged" text to="/" exact>
+        <v-icon>mdi-home</v-icon>
+        HOME
       </v-btn>
     </div>
   </v-app-bar>
@@ -73,10 +198,17 @@ import { mapState, mapMutations, Store } from "vuex";
 
 export default {
   name: "Header",
-  props: {},
+  props: {
+   user: Object},
   data() {
     return {
-      condicion: null,
+      admin:false,
+      condicion: null,       drawer: null,
+        items: [
+          { title: 'Home', icon: 'mdi-view-dashboard' },
+          { title: 'About', icon: 'mdi-forum' },
+        ],
+        
     };
   },
   methods: {
@@ -89,8 +221,10 @@ export default {
     darkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     },
+
   },
-  computed: { ...mapState(["logged"]) },
+  computed: { ...mapState(["logged"]),     
+  },
 };
 </script>
 <style scoped>

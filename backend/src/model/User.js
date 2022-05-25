@@ -12,7 +12,9 @@ module.exports = (sequelize, Sequelize) => {
 
     },contraseña: {
       type: Sequelize.STRING,
-    },
+    },rol: {
+      type: Sequelize.STRING
+    }
   });
 
   return User;

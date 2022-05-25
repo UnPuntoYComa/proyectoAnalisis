@@ -1,21 +1,13 @@
 <template>
   <v-container>
     <v-container>
-      <v-row justify="center">
-        <v-col cols="12" md="6"
-          ><v-card
-            ><v-card-title class="text-h2 justify-center"
-              >¡REGISTRATE!</v-card-title
-            ></v-card
-          ></v-col
-        >
-      </v-row>
+
       <v-row justify="center">
         <v-col cols="12" md="6">
           <v-stepper v-model="e1">
             <v-stepper-header>
               <v-stepper-step editable :complete="e1 > 1" step="1"
-                >Crea tu Usuario</v-stepper-step
+                >Crea un usuario</v-stepper-step
               >
               <v-divider></v-divider>
               <v-stepper-step editable :complete="e1 > 2" step="2"
@@ -32,7 +24,7 @@
                         <v-text-field
                           class="mx-4"
                           :rules="rulesEmail"
-                          label="Ingresa tu correo"
+                          label="Ingresa el correo electronico"
                           name="register"
                           prepend-icon="mdi-at"
                           type="text"
@@ -51,7 +43,7 @@
                           :type="show ? 'text' : 'password'"
                           :rules="[rulesPass.required]"
                           @click:append="show = !show"
-                          label="Ingresa tu contraseña"
+                          label="Ingresa la contraseña"
                           validate-on-blur
                         ></v-text-field>
                       </v-col>
@@ -69,14 +61,7 @@
                       >Continue</v-btn
                     >
                     <v-spacer></v-spacer>
-                    <small class="mt-2">¿Ya tienes cuenta?</small>
-                    <v-btn
-                      text
-                      color="teal accent-3"
-                      :to="{ name: 'Signin' }"
-                      exact
-                      >Inicia Sesion</v-btn
-                    >
+                    
                   </v-row>
                 </v-stepper-content>
 
@@ -88,7 +73,7 @@
                         <v-text-field
                           class="mx-4"
                           :rules="rulesName"
-                          label="Ingresa tu nombre"
+                          label="Ingresa el nombre"
                           name="register"
                           prepend-icon="mdi-form-textbox"
                           type="text"
@@ -99,16 +84,15 @@
                     </v-row>
                     <v-row justify="center">
                       <v-col cols="12" md="8">
-                        <v-text-field
-                          class="mx-4"
-                          :rules="rulesName"
-                          label="Ingresa tu apellido"
-                          name="register"
-                          prepend-icon="mdi-form-textbox"
-                          type="text"
-                          validate-on-blur
-                          v-model="register.lastname"
-                        ></v-text-field>
+                      <v-select
+                        prepend-icon="mdi-form-textbox"
+                        class="mx-4"
+                        v-model="register.rol"
+                        :items="items"
+                        :rules="[v => !!v || 'Item is required']"
+                        label="Rol"
+                        required
+                        ></v-select>
                       </v-col>
                     </v-row>
 
@@ -126,19 +110,14 @@
                     >
                     <v-btn text @click="e1--">regresar</v-btn>
                     <v-spacer></v-spacer>
-                    <small class="mt-2">¿Ya tienes cuenta?</small>
-                    <v-btn
-                      text
-                      color="teal accent-3"
-                      :to="{ name: 'Signin' }"
-                      exact
-                      >Inicia Sesion</v-btn
-                    >
                   </v-row>
                 </v-stepper-content>
               </v-stepper-items>
             </v-form>
           </v-stepper>
+                    <v-alert type="success" :value="alert">
+                     Registrado correctamente
+                     </v-alert>
         </v-col>
       </v-row>
     </v-container>
@@ -153,9 +132,12 @@ export default {
         contraseña: "",
         nombre: "",
         firstname: "",
-        rol:"admin",
-      },
-
+        rol:"",
+      },items: [
+        'admin',
+        'usuario'
+      ],
+        alert: false,
       e1: 1,
       show: false,
       rulesName: [(v) => !!v || "Campo requerido"],
@@ -178,8 +160,11 @@ export default {
         console.log(response);
         let token = response.data.token;
         if (token) {
-          localStorage.setItem("jwt", token);
-          this.$router.push("/crear-encuesta");
+          //localStorage.setItem("jwt", token);
+          setTimeout(()=>{
+      this.alert=true
+    },500)
+          //this.$router.push("/crear-encuesta");
           //swal("Success", "Registro exitoso!", "success");
         } else {
           //swal("Error", "Algo anda mal :c", "error");

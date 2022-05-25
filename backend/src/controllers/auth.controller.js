@@ -6,11 +6,12 @@ import db from '../database'
 //registro de usuarios
 export const signup = async (req, res) => {
   try {
-    const { nombre, correo, contraseña } = req.body;
+    const { nombre, correo, contraseña, rol } = req.body;
     const newUser = await db.user.create({
       nombre,
       correo,
       contraseña: await bcrypt.hash(contraseña, 5),
+      rol,
     });
 
     const token = jwt.sign({ id: newUser.id_usuario }, config.SECRET, {
@@ -49,7 +50,7 @@ export const signin = async (req, res) => {
     }
   
 
-    const token = jwt.sign({ id: userFound.id_usuario }, config.SECRET, {
+    const token = jwt.sign({ id: userFound.id_usuario, rol: userFound.rol,nombre: userFound.nombre }, config.SECRET, {
       expiresIn: 86400,
     });
 

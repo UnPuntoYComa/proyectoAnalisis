@@ -5,7 +5,7 @@
         <v-card class="elevation-12" height="100%">
           <v-form @submit.prevent="loginUser">
             <v-img
-              src="https://citrusbug.com/storage/uploads/technology/Vue.jpg"
+              src="https://images.unsplash.com/photo-1589901507334-19f6a78c0db4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               aspect-ratio="1.9"
@@ -15,7 +15,7 @@
             <v-card-text>
               <v-text-field
                 :rules="rulesName"
-                label="Ingresa tu email"
+                label="Ingresa tu email"  
                 name="login"
                 prepend-icon="mdi-account"
                 type="text"
@@ -36,12 +36,9 @@
               ></v-text-field>
             </v-card-text>
             <v-card-actions>
-              <v-btn text color="primary" type="submit">Iniciar Sesion</v-btn>
+              <small></small>
               <v-spacer></v-spacer>
-              <small>¿No tienes cuenta?</small>
-              <v-btn text color="orange accent-4" to="/signup"
-                >Registrate</v-btn
-              >
+              <v-btn text color="primary" type="submit">Iniciar Sesion</v-btn>
             </v-card-actions>
           </v-form>
         </v-card>
@@ -72,10 +69,9 @@ export default {
       try {
         let response = await this.$http.post("/api/auth/signin", this.user);
         let token = response.data.token;
-        console.log(token);
         if (token) {
           localStorage.setItem("jwt", token);
-          this.$router.push("/crear-encuesta");
+          this.$router.push("/");
         }
       } catch (error) {
         let err = error.response;

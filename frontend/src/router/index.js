@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import TestSurveyBuilder from '../components/pages/survey-builder/TestSurveyBuilder.vue';
 
 
 Vue.use(VueRouter)
@@ -23,36 +22,45 @@ const routes = [
     component: () => import(/* webpackChunkName: "proyecto" */ '../views/login/Signup.vue')
   },
   {
-    path: '/encuestas',
-    name: 'Encuestas',
-    component: () => import(/* webpackChunkName: "proyecto" */ '../views/VerEncuestas.vue')
-  },{ 
-    path: '/encuesta/:id', 
-    name: 'encuestaId',
-    component: () => import(/* webpackChunkName: "proyecto" */ '../views/VerEncuesta.vue') 
-  },{
-    path: '/done',
-    name: 'done',
-    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Done.vue')
+    path: '/vender',
+    name: 'Vender',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Vender.vue')
   },
   {
-    path: '/crear-encuesta',
-    name: 'CrearEncuestas',
-    component: () => import(/* webpackChunkName: "proyecto" */ '../views/CrearEncuesta'),
-    children: [
-      {
-        path: "/",
-        name: "Create",
-        component: TestSurveyBuilder,
-      },
-    ]
+    path: '/historialVentas',
+    name: 'historialVentas',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/HistorialVentas.vue')
   },
   {
-    path: '/estadisticas',
-    name: 'Estadisticas',
-    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Estadisticas.vue')
+    path: '/inventario',
+    name: 'inventario',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Inventario.vue')
   },
-
+  {
+    path: '/cargarProducto',
+    name: 'cargarProducto',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/CargarProducto.vue')
+  },
+  {
+    path: '/crearUsuario',
+    name: 'CrearUsuario',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/CrearUsuario.vue')
+  },
+  {
+    path: '/verUsuario',
+    name: 'VerUsuario',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/VerUsuario.vue')
+  },
+  {
+    path: '/proveedores',
+    name: 'Proveedores',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/Proveedores.vue')
+  },
+  {
+    path: '/crearProveedores',
+    name: 'CrearProveedores',
+    component: () => import(/* webpackChunkName: "proyecto" */ '../views/CrearProveedores.vue')
+  },
 
 ]
 
